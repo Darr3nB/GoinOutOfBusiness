@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-    GoobUser user;
     UserService userService;
 
     @PostMapping(value = "login")
-    public HttpEntity<Void> performLogin(@RequestBody Login loginDto, HttpServletResponse response){
-
+    public HttpEntity<Void> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
+        if (!userService.validateLogin(loginDto)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        GoobUser user = userService.findUserByEMail(loginDto.getEMail());
+        userService.loginUser(user, response);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

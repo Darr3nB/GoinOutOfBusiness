@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 public class PasswordAgent {
     private BCryptPasswordEncoder passwordEncoder;
 
-    public String hashPassword(String plainPassword){
+    public String hashPassword(String plainPassword) {
         return passwordEncoder.encode(plainPassword);
     }
 
-    public Boolean passwordMatcher(String hashedPassword, String plainPassword){
+    public Boolean passwordMatcher(String hashedPassword, String plainPassword) {
         return passwordEncoder.matches(plainPassword, hashedPassword);
     }
 }
