@@ -1,4 +1,4 @@
-package com.ZSoos_Darren.GoingOutOfBusiness.goobUser;
+package com.ZSoos_Darren.GoingOutOfBusiness.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
