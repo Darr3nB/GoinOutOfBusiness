@@ -28,10 +28,17 @@ public class UserService {
     }
 
     public void addUserDetailToCookies(GoobUser user, HttpServletResponse response) {
-        Cookie theCookie = new Cookie("hfUsername", user.getUserName());
+        Cookie theCookie = new Cookie("goobEMailAddress", user.getUserName());
         theCookie.setMaxAge(60 * 60 * 24);
         theCookie.setPath("/");
 
+        response.addCookie(theCookie);
+    }
+
+    public void removeUserDetailFromCookies(HttpServletResponse response) {
+        Cookie theCookie = new Cookie("goobEMailAddress", null);
+        theCookie.setMaxAge(0);
+        theCookie.setPath("/");
         response.addCookie(theCookie);
     }
 }
