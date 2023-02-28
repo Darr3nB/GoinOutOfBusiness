@@ -1,6 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
+import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,5 +60,16 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+    }
+
+    @PostMapping(value = "registration")
+    public HttpEntity<Void> performRegistration(@RequestBody Registration regDto) {
+        if (!regDto.validateField()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        userService.saveNewUser(regDto);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
