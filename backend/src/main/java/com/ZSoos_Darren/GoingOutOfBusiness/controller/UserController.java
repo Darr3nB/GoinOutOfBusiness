@@ -3,6 +3,8 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -28,9 +30,22 @@ public class UserController {
     }
 
     @GetMapping(value = "logout")
-    public HttpEntity<Void> performLogout(HttpServletResponse response){
+    public HttpEntity<Void> performLogout(HttpServletResponse response) {
         userService.removeUserDetailFromCookies(response);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "logged-in-user-all-detail")
+    public HttpEntity<GoobUser> getLoggedInUserDetail(HttpServletRequest request) {
+        String eMail = userService.getEMailFromCookies(request);
+
+        if (eMail == null) {
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+        }
+
+        GoobUser user = userService.findUserByEMail(eMail);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
