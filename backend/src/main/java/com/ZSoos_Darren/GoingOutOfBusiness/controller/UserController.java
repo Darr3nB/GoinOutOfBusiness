@@ -25,7 +25,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         GoobUser user = userService.findUserByEMail(loginDto.getEMail());
-        userService.loginUser(user, response);
+        userService.addUserDetailToCookies(user, response);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
