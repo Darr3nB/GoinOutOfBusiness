@@ -1,10 +1,8 @@
-package com.ZSoos_Darren.GoingOutOfBusiness.Model;
+package com.ZSoos_Darren.GoingOutOfBusiness.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +19,7 @@ public class GoobUser {
     private Long id;
     private String eMail;
     private String userName;
+    @JsonIgnore
     private String password;
     @Column(columnDefinition = "timestamp default current_timestamp")
     @CreationTimestamp
@@ -30,5 +29,6 @@ public class GoobUser {
     private Date dateOfBirth;
     @Column(columnDefinition = "VARCHAR")
     private String profilePicture;
+    @Enumerated(EnumType.STRING)
     private Role role;
 }
