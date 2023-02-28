@@ -12,4 +12,8 @@ public class PasswordAgent {
     public String hashPassword(String plainPassword){
         return passwordEncoder.encode(plainPassword);
     }
+
+    public Boolean passwordMatcher(String hashedPassword, String plainPassword){
+        return passwordEncoder.matches(plainPassword, hashedPassword);
+    }
 }
