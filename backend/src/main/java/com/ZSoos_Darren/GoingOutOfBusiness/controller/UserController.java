@@ -3,7 +3,6 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -20,7 +19,7 @@ public class UserController {
 
     @PostMapping(value = "login")
     public HttpEntity<Void> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
-        if (!userService.validateLogin(loginDto)) {
+        if (!userService.validateProfile(loginDto)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         GoobUser user = userService.findUserByEMail(loginDto.getEMail());
@@ -47,5 +46,18 @@ public class UserController {
         GoobUser user = userService.findUserByEMail(eMail);
 
         return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @DeleteMapping(value = "delete-profile")
+    public HttpEntity<Void> deleteProfile(@RequestBody Login loginDto) {
+        if (!userService.validateProfile(loginDto)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (userService.deleteUserByEMail(loginDto)) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 }
