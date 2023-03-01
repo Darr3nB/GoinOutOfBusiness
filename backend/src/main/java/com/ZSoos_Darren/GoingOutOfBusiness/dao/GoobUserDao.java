@@ -4,5 +4,5 @@ import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GoobUserDao extends JpaRepository<GoobUser, Long> {
-    GoobUser findGoobUserByEMail(String eMail);
+    GoobUser findUserByeMail(String eMail);
 }

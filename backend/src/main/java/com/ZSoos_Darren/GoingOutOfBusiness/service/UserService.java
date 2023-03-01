@@ -22,7 +22,7 @@ public class UserService {
     PasswordAgent passwordAgent;
 
     public GoobUser findUserByEMail(String eMail) {
-        return userDao.findGoobUserByEMail(eMail);
+        return userDao.findUserByeMail(eMail);
     }
 
     public Boolean validateProfile(Login loginDto) {
