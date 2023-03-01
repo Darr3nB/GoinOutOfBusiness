@@ -1,10 +1,10 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import com.ZSoos_Darren.GoingOutOfBusiness.helper.IncrementGenerator;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import java.math.BigDecimal;
 
@@ -14,6 +14,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Product {
     @Id
+    @GeneratedValue(generator = "increment-generator")
+    @GenericGenerator(name="increment-generator", strategy = "com.ZSoos_Darren.GoingOutOfBusiness.helper.IncrementGenerator", parameters = {
+            @Parameter(name = IncrementGenerator.TABLE_NAME,value = "product")
+    })
     Long id;
     String name;
     String description;
