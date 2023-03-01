@@ -12,12 +12,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Service
 @AllArgsConstructor
 @Slf4j
-public class UserService {
+public class UserService implements CommandLineRunner {
     GoobUserDao userDao;
     PasswordAgent passwordAgent;
 
@@ -92,5 +97,26 @@ public class UserService {
         newRegistration.setRole(Role.USER);
 
         userDao.save(newRegistration);
+    }
+
+    public void addDefaultAdmin(){
+        if (userDao.count() == 0){
+            GoobUser defaultAdmin = new GoobUser();
+
+
+            defaultAdmin.setEMail("fake@mail.com");
+            defaultAdmin.setUserName("admin");
+            defaultAdmin.setPassword("$2a$10$aggKLhBPm7ke/CfXkiSnAOzpHXdIXqm9j5MxFobGjr.O38gnngBsK");
+            defaultAdmin.setDateOfBirth(null);
+            defaultAdmin.setProfilePicture(Utility.questionMarkPicture);
+            defaultAdmin.setRole(Role.ADMIN);
+
+            userDao.save(defaultAdmin);
+        }
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        addDefaultAdmin();
     }
 }

@@ -1,4 +1,4 @@
-package com.ZSoos_Darren.GoingOutOfBusiness.util;
+package com.ZSoos_Darren.GoingOutOfBusiness.helper;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
