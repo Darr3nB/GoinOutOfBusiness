@@ -15,10 +15,14 @@ public class ProductService {
     private ProductDao productDao;
 
     public Page<Product> getPageOfProductsFromCategory(int page, int numberOfItemsOnPage, ProductType type, String orderBy, String direction) {
-        return productDao.findAllByType(type, PageRequest.of(page, numberOfItemsOnPage,Sort.by(direction,orderBy)));
+        return productDao.findAllByType(type, PageRequest.of(page, numberOfItemsOnPage,Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
     }
 
     public Page<Product> getPageOfAllProducts(int page, int numberOfItemsOnPage, String orderBy, String direction) {
-        return productDao.findAll(PageRequest.of(page, numberOfItemsOnPage, Sort.by(direction,orderBy)));
+        return productDao.findAll(PageRequest.of(page, numberOfItemsOnPage, Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
+    }
+
+    public void saveProduct(Product product) {
+        productDao.save(product);
     }
 }

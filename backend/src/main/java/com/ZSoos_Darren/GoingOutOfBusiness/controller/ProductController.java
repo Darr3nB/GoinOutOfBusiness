@@ -26,15 +26,21 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(results);
     }
 
-//    @GetMapping("/list/{page}")
-//    public ResponseEntity<Page<Product>> getAllProductsPage(
-//            @PathVariable int page,
-//            @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
-//            @RequestParam(name = "direction", defaultValue = "desc") String direction,
-//            @RequestParam(name = "per-page", defaultValue = "20") int productPerPage) {
-//
-//
-//    }
+    @GetMapping("/list/{page}")
+    public ResponseEntity<Page<Product>> getAllProductsPage(
+            @PathVariable int page,
+            @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
+            @RequestParam(name = "direction", defaultValue = "desc") String direction,
+            @RequestParam(name = "per-page", defaultValue = "20") int productPerPage) {
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getPageOfAllProducts(page,productPerPage,orderBy,direction));
+    }
+
+    @PostMapping("/add-product")
+    public ResponseEntity<Void> addProduct(@RequestBody Product newProduct) {
+        // TODO: 2023. 03. 01. Check for admin role for this specific route
+        productService.saveProduct(newProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
 
 }
