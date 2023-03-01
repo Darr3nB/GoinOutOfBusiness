@@ -17,7 +17,7 @@ public class Registration {
     private Date dateOfBrith;
     private String profilePicture;
 
-    public Boolean validateField(){
+    public Boolean validateField() {
         // TODO needs logic to validate all fields
         return null;
     }
