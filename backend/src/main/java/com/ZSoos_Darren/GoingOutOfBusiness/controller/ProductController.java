@@ -5,6 +5,7 @@ import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,14 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/category/{category}/{page}")
-    public Page<Product> getProductsPageFromCategory(
+    public ResponseEntity<Page<Product>> getProductsPageFromCategory(
             @PathVariable String category,
             @PathVariable int page,
             @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
             @RequestParam(name = "direction", defaultValue = "desc") String direction,
             @RequestParam(name = "per-page", defaultValue = "20") int productPerPage) {
-        return productService.getPageOfProductsFromCategory(page,productPerPage,ProductType.valueOf(category),orderBy,direction);
+        var results = productService.getPageOfProductsFromCategory(page,productPerPage, ProductType.valueOf(category.toUpperCase()),orderBy,direction);
+        return ResponseEntity.status(HttpStatus.OK).body(results);
     }
 
 //    @GetMapping("/list/{page}")
