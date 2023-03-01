@@ -1,17 +1,16 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
+import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -21,11 +20,55 @@ public class UserController {
 
     @PostMapping(value = "login")
     public HttpEntity<Void> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
-        if (!userService.validateLogin(loginDto)) {
+        if (!userService.validateProfile(loginDto)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         GoobUser user = userService.findUserByEMail(loginDto.getEMail());
-        userService.loginUser(user, response);
+        userService.addUserDetailToCookies(user, response);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "logout")
+    public HttpEntity<Void> performLogout(HttpServletResponse response) {
+        userService.removeUserDetailFromCookies(response);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "logged-in-user-all-detail")
+    public HttpEntity<GoobUser> getLoggedInUserDetail(HttpServletRequest request) {
+        String eMail = userService.getEMailFromCookies(request);
+
+        if (eMail == null) {
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+        }
+
+        GoobUser user = userService.findUserByEMail(eMail);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @DeleteMapping(value = "delete-profile")
+    public HttpEntity<Void> deleteProfile(@RequestBody Login loginDto) {
+        if (!userService.validateProfile(loginDto)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (userService.deleteUserByEMail(loginDto)) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+    @PostMapping(value = "registration")
+    public HttpEntity<Void> performRegistration(@RequestBody Registration regDto) {
+        if (!regDto.validateField()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        userService.saveNewUser(regDto);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
