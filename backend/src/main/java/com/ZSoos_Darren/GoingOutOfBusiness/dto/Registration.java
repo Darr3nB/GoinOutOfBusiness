@@ -18,7 +18,24 @@ public class Registration {
     private String profilePicture;
 
     public Boolean validateField() {
-        // TODO needs logic to validate all fields
-        return null;
+        if (!this.password.equals(this.passwordAgain)) {
+            return false;
+        }
+
+        if (!validateEmail()) {
+            return false;
+        }
+
+        return this.userName.length() > 3 && this.password.length() > 3;
+    }
+
+    private Boolean validateEmail() {
+        if (this.eMail == null || this.eMail.isEmpty()) {
+            return false;
+        }
+
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+        return this.eMail.matches(regex);
     }
 }

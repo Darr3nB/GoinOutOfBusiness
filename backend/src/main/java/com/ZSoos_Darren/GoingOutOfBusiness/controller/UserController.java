@@ -64,9 +64,9 @@ public class UserController {
 
     @PostMapping(value = "registration")
     public HttpEntity<Void> performRegistration(@RequestBody Registration regDto) {
-//        if (!regDto.validateField()) {
-//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-//        }
+        if (!regDto.validateField()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
         userService.saveNewUser(regDto);
 
