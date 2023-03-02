@@ -42,5 +42,12 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Product> getProductDetails(@PathVariable long id) {
+        var product = productService.getProductForId(id);
+        if(product == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
 
 }
