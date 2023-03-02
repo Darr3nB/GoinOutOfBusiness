@@ -2,12 +2,16 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
 import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
 import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.dto.CartItem;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Iterator;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -49,5 +53,17 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
-
+    @PostMapping("/cart")
+    public ResponseEntity<Set<CartItem>> viewCart(@RequestBody Set<CartItem> items) {
+        for (Iterator<CartItem> i = items.iterator(); i.hasNext();) {
+            CartItem element = i.next();
+            Product product = productService.getProductForId(element.getId());
+            if (product == null) {
+                i.remove();
+                continue;
+            }
+            element.setDataFromProduct(product);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(items);
+    }
 }
