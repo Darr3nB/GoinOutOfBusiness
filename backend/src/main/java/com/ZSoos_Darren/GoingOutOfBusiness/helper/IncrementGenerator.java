@@ -14,8 +14,6 @@ import java.util.Properties;
 
 public class IncrementGenerator
         implements IdentifierGenerator {
-//    private String tableName;
-//    private String idColumn;
     private String queryString;
     public static final String TABLE_NAME = "tableName";
     public static final String ID_COLUMN = "id";
