@@ -19,7 +19,7 @@ public class GoobUser {
     @GeneratedValue
     private Long id;
     @Column(unique = true)
-    private String eMail;
+    private String email;
     private String userName;
     @JsonIgnore
     private String password;

@@ -32,13 +32,13 @@ public class RegistrationDtoTest {
 
     @Test
     public void getInitEmail() {
-        Assertions.assertEquals(regDto.getEMail(), initeMail);
+        Assertions.assertEquals(regDto.getEmail(), initeMail);
     }
 
     @Test
     public void setEmail() {
-        regDto.setEMail("fake@fake.com");
-        Assertions.assertEquals(regDto.getEMail(), "fake@fake.com");
+        regDto.setEmail("fake@fake.com");
+        Assertions.assertEquals(regDto.getEmail(), "fake@fake.com");
     }
 
     @Test
@@ -121,19 +121,19 @@ public class RegistrationDtoTest {
 
     @Test
     public void incorrectMailValidationNameMissing(){
-        regDto.setEMail("@email.com");
+        regDto.setEmail("@email.com");
         Assertions.assertFalse(regDto.validateField());
     }
 
     @Test
     public void incorrectMailValidationAtMissing(){
-        regDto.setEMail("fakemail.com");
+        regDto.setEmail("fakemail.com");
         Assertions.assertFalse(regDto.validateField());
     }
 
     @Test
     public void incorrectMailValidationOverall(){
-        regDto.setEMail("fakemailcom");
+        regDto.setEmail("fakemailcom");
         Assertions.assertFalse(regDto.validateField());
     }
 }

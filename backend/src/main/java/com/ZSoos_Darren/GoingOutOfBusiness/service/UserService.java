@@ -15,10 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -27,11 +23,11 @@ public class UserService implements CommandLineRunner {
     PasswordAgent passwordAgent;
 
     public GoobUser findUserByEMail(String eMail) {
-        return userDao.findUserByeMail(eMail);
+        return userDao.findUserByEmail(eMail);
     }
 
     public Boolean validateProfile(Login loginDto) {
-        GoobUser foundUserByEMail = findUserByEMail(loginDto.getEMail());
+        GoobUser foundUserByEMail = findUserByEMail(loginDto.getEmail());
 
         return passwordAgent.passwordMatcher(foundUserByEMail.getPassword(), loginDto.getPassword()) && !foundUserByEMail.getUserName().equals("DELETED_USER");
     }
@@ -67,7 +63,7 @@ public class UserService implements CommandLineRunner {
     }
 
     public Boolean deleteUserByEMail(Login loginDto) {
-        GoobUser userByEMail = findUserByEMail(loginDto.getEMail());
+        GoobUser userByEMail = findUserByEMail(loginDto.getEmail());
 
         if (userByEMail.getUserName().equals("DELETED_USER")) {
             return false;
@@ -85,7 +81,7 @@ public class UserService implements CommandLineRunner {
     public void saveNewUser(Registration regDto) {
         GoobUser newRegistration = new GoobUser();
 
-        newRegistration.setEMail(regDto.getEMail());
+        newRegistration.setEmail(regDto.getEmail());
         newRegistration.setUserName(regDto.getUserName());
         newRegistration.setPassword(passwordAgent.hashPassword(regDto.getPassword()));
         newRegistration.setDateOfBirth(regDto.getDateOfBrith());
@@ -104,7 +100,7 @@ public class UserService implements CommandLineRunner {
             GoobUser defaultAdmin = new GoobUser();
 
 
-            defaultAdmin.setEMail("fake@mail.com");
+            defaultAdmin.setEmail("fake@mail.com");
             defaultAdmin.setUserName("admin");
             defaultAdmin.setPassword("$2a$10$aggKLhBPm7ke/CfXkiSnAOzpHXdIXqm9j5MxFobGjr.O38gnngBsK");
             defaultAdmin.setDateOfBirth(null);
