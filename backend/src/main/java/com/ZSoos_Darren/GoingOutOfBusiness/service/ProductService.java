@@ -22,6 +22,10 @@ public class ProductService {
         return productDao.findAll(PageRequest.of(page, numberOfItemsOnPage, Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
     }
 
+    public Product getProductForId(long productId) {
+        return productDao.findById(productId).orElse(null);
+    }
+
     public void saveProduct(Product product) {
         productDao.save(product);
     }
