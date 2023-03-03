@@ -1,13 +1,15 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.security;
+
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JwtUtil {
-    private static final String SECRET_KEY = "secret";
+    private static final String SECRET_KEY = SecretKeyGenerator.generateSecretKey(32); // Generate a 256-bit key
 
     public static String generateToken(String userId) {
         Date now = new Date();
