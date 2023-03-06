@@ -23,7 +23,7 @@ public class UserController {
         if (!userService.validateProfile(loginDto)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        GoobUser user = userService.findUserByEMail(loginDto.getEMail());
+        GoobUser user = userService.findUserByEMail(loginDto.getEmail());
         userService.addUserDetailToCookies(user, response);
 
         return ResponseEntity.status(HttpStatus.OK).build();

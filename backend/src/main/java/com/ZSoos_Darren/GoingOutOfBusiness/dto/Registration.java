@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 public class Registration {
-    private String eMail;
+    private String email;
     private String userName;
     private String password;
     private String passwordAgain;
@@ -30,12 +30,12 @@ public class Registration {
     }
 
     private Boolean validateEmail() {
-        if (this.eMail == null || this.eMail.isEmpty()) {
+        if (this.email == null || this.email.isEmpty()) {
             return false;
         }
 
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
-        return this.eMail.matches(regex);
+        return this.email.matches(regex);
     }
 }
