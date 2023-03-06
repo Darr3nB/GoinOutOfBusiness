@@ -3,6 +3,7 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
+import com.ZSoos_Darren.GoingOutOfBusiness.security.JwtUtil;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
