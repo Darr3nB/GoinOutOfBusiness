@@ -3,6 +3,7 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
+import com.ZSoos_Darren.GoingOutOfBusiness.security.JwtUtil;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ public class UserController {
         if (!userService.validateProfile(loginDto)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        GoobUser user = userService.findUserByEMail(loginDto.getEMail());
+        GoobUser user = userService.findUserByEMail(loginDto.getEmail());
         userService.addUserDetailToCookies(user, response);
 
         return ResponseEntity.status(HttpStatus.OK).build();
