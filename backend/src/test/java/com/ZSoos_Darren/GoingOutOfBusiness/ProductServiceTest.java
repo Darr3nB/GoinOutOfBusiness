@@ -37,10 +37,10 @@ public class ProductServiceTest {
     private static final Sort.Direction ORDER_DIRECTION = Sort.Direction.DESC;
 
     @Mock
-    private static ProductDao mockProductDao;
+    private ProductDao mockProductDao;
 
     @InjectMocks
-    private static ProductService productService;
+    private ProductService productService;
 
     private static final Product testProduct1 = new Product(EXPECTED_ID,EXPECTED_NAME,EXPECTED_DESCRIPTION,EXPECTED_PRICE, EXPECTED_TYPE_OTHER,EXPECTED_INVENTORY);
     private static final Product testProduct2 = new Product(EXPECTED_ID+1,EXPECTED_NAME,EXPECTED_DESCRIPTION,EXPECTED_PRICE, EXPECTED_TYPE_OTHER,EXPECTED_INVENTORY+1);
