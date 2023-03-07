@@ -20,7 +20,6 @@ public class GoobUser {
     private Long id;
     @Column(unique = true)
     private String email;
-    private String userName;
     @JsonIgnore
     private String password;
     @Column(columnDefinition = "timestamp default current_timestamp")

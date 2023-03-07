@@ -47,7 +47,7 @@ export default function LoginModal({open, closeModal}) {
                 <form onSubmit={event => performLogin(event)}>
                     <br/><input onInput={(event) => checkEmail(event.target.value)} type="text" placeholder="Email"
                                 name="email-field"/>
-                    <p className={loginPtag === 1 ? 'visible-login-p' : loginPtag === 0 ? 'valid-login-p' : 'invisible-login-p'}>
+                    <p className={loginPtag === 1 ? 'error-email-p' : loginPtag === 0 ? 'valid-email-p' : 'invisible-email-p'}>
                         {loginPtag === 1 ? 'Invalid e-mail format.' : loginPtag === 0 ? 'Valid e-mail format.' : ''}
                     </p>
                     <input type="text" placeholder="Password" name="password-field" minLength="3"/>

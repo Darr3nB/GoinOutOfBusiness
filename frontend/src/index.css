@@ -33,16 +33,16 @@
     right: 8px;
 }
 
-.visible-login-p {
+.error-email-p {
     visibility: visible;
     color: red;
 }
 
-.invisible-login-p {
+.invisible-email-p {
     visibility: hidden;
 }
 
-.valid-login-p {
+.valid-email-p {
     visibility: visible;
     color: green;
 }

@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GoobUserDao extends JpaRepository<GoobUser, Long> {
     GoobUser findUserByEmail(String eMail);
+
+    Boolean existsByEmail(String email);
 }
