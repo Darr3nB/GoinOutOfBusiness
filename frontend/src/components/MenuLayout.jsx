@@ -5,6 +5,7 @@ import {useState} from "react";
 export default function MenuLayout() {
     const [openModal, setOpenModal] = useState(false);
 
+    // TODO Check if logged in.
     const showAndHideLoginModal = (event) => {
         event.preventDefault();
         setOpenModal(!openModal);
@@ -17,6 +18,7 @@ export default function MenuLayout() {
             <LoginModal open={openModal} closeModal={() => {
                 setOpenModal(false);
             }}/>
+            <Link to={`/registration`}>Registration</Link>
         </div>
     );
 }

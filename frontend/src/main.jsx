@@ -4,6 +4,7 @@ import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Index from "./routes";
 import HomePage from "./components/HomePage";
+import Registration from "./routes/Registration";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage/>
+            },
+            {
+                path: "/registration",
+                element: <Registration/>
             }
         ]
     }
