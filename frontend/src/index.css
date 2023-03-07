@@ -41,3 +41,8 @@
 .invisible-login-p {
     visibility: hidden;
 }
+
+.valid-login-p {
+    visibility: visible;
+    color: green;
+}
