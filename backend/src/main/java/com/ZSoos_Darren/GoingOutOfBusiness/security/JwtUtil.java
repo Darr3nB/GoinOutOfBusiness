@@ -33,7 +33,7 @@ public class JwtUtil {
         claims.put("role", user.getRole());
 
         return Jwts.builder()
-                .setSubject(user.getUserName())
+                .setSubject(user.getEmail())
                 .addClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)

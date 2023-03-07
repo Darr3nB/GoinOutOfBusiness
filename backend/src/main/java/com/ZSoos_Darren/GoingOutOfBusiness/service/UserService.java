@@ -29,11 +29,11 @@ public class UserService implements CommandLineRunner {
     public Boolean validateProfile(Login loginDto) {
         GoobUser foundUserByEMail = findUserByEMail(loginDto.getEmail());
 
-        return passwordAgent.passwordMatcher(foundUserByEMail.getPassword(), loginDto.getPassword()) && !foundUserByEMail.getUserName().equals("DELETED_USER");
+        return passwordAgent.passwordMatcher(foundUserByEMail.getPassword(), loginDto.getPassword()) && !foundUserByEMail.getEmail().equals("DELETED_USER");
     }
 
     public void addUserDetailToCookies(GoobUser user, HttpServletResponse response) {
-        Cookie theCookie = new Cookie("goobEMailAddress", user.getUserName());
+        Cookie theCookie = new Cookie("goobEMailAddress", user.getEmail());
         theCookie.setMaxAge(Utility.oneDayForCookies);
         theCookie.setPath("/");
 
@@ -65,11 +65,11 @@ public class UserService implements CommandLineRunner {
     public Boolean deleteUserByEMail(Login loginDto) {
         GoobUser userByEMail = findUserByEMail(loginDto.getEmail());
 
-        if (userByEMail.getUserName().equals("DELETED_USER")) {
+        if (userByEMail.getEmail().equals("DELETED_USER")) {
             return false;
         }
 
-        userByEMail.setUserName("DELETED_USER");
+        userByEMail.setEmail("DELETED_USER");
         userByEMail.setPassword("-----");
         userByEMail.setDateOfBirth(null);
         userByEMail.setProfilePicture(Utility.questionMarkPicture);
@@ -82,7 +82,6 @@ public class UserService implements CommandLineRunner {
         GoobUser newRegistration = new GoobUser();
 
         newRegistration.setEmail(regDto.getEmail());
-        newRegistration.setUserName(regDto.getUserName());
         newRegistration.setPassword(passwordAgent.hashPassword(regDto.getPassword()));
         newRegistration.setDateOfBirth(regDto.getDateOfBrith());
         if (regDto.getProfilePicture() == null) {
@@ -95,13 +94,12 @@ public class UserService implements CommandLineRunner {
         userDao.save(newRegistration);
     }
 
-    public void addDefaultAdmin(){
-        if (userDao.count() == 0){
+    public void addDefaultAdmin() {
+        if (userDao.count() == 0) {
             GoobUser defaultAdmin = new GoobUser();
 
 
             defaultAdmin.setEmail("fake@mail.com");
-            defaultAdmin.setUserName("admin");
             defaultAdmin.setPassword("$2a$10$aggKLhBPm7ke/CfXkiSnAOzpHXdIXqm9j5MxFobGjr.O38gnngBsK");
             defaultAdmin.setDateOfBirth(null);
             defaultAdmin.setProfilePicture(Utility.questionMarkPicture);
@@ -114,5 +112,9 @@ public class UserService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         addDefaultAdmin();
+    }
+
+    public Boolean containsEmail(String email) {
+        return userDao.existsByEmail(email);
     }
 }

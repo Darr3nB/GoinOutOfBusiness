@@ -32,3 +32,44 @@
     top: 8px;
     right: 8px;
 }
+
+.error-email-p {
+    visibility: visible;
+    color: red;
+}
+
+.invisible-email-p {
+    visibility: hidden;
+}
+
+.valid-email-p {
+    visibility: visible;
+    color: green;
+}
+
+.middle-text {
+    text-align: center;
+}
+
+.reg-form {
+    text-align: center;
+    border: 3px solid black;
+    width: 300px;
+    margin: auto;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button-link:hover {
+    background-color: #0062cc;
+    color: #fff;
+}

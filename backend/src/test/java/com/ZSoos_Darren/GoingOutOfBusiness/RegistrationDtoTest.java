@@ -14,7 +14,6 @@ import java.util.Date;
 public class RegistrationDtoTest {
     Registration regDto;
     String initeMail = "fake@init.com";
-    String initUserName = "initUserName";
     String initPassword = "password";
     String initPasswordAgain = "password";
     Date initDateOfBirth;
@@ -26,7 +25,7 @@ public class RegistrationDtoTest {
     @BeforeEach
     public void initRegDto() throws Exception {
         initDateOfBirth = dateFormat.parse(dateOfBirth);
-        regDto = new Registration(initeMail, initUserName, initPassword, initPasswordAgain,
+        regDto = new Registration(initeMail, initPassword, initPasswordAgain,
                 initDateOfBirth, initProfilePicture);
     }
 
@@ -39,17 +38,6 @@ public class RegistrationDtoTest {
     public void setEmail() {
         regDto.setEmail("fake@fake.com");
         Assertions.assertEquals(regDto.getEmail(), "fake@fake.com");
-    }
-
-    @Test
-    public void getUserName() {
-        Assertions.assertEquals(regDto.getUserName(), initUserName);
-    }
-
-    @Test
-    public void setUserName() {
-        regDto.setUserName("TestUserName");
-        Assertions.assertEquals(regDto.getUserName(), "TestUserName");
     }
 
     @Test
@@ -99,12 +87,6 @@ public class RegistrationDtoTest {
     @Test
     public void successfulFieldValidation(){
         Assertions.assertTrue(regDto.validateField());
-    }
-
-    @Test
-    public void incorrectUserNameValidation(){
-        regDto.setUserName("A");
-        Assertions.assertFalse(regDto.validateField());
     }
 
     @Test

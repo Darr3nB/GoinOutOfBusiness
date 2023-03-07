@@ -10,7 +10,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class Registration {
     private String email;
-    private String userName;
     private String password;
     private String passwordAgain;
     @JsonFormat(pattern = "YY.MM.dd")
@@ -26,7 +25,7 @@ public class Registration {
             return false;
         }
 
-        return this.userName.length() > 3 && this.password.length() > 3;
+        return this.password.length() > 3;
     }
 
     private Boolean validateEmail() {

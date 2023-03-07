@@ -3,7 +3,6 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
-import com.ZSoos_Darren.GoingOutOfBusiness.security.JwtUtil;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -72,5 +71,14 @@ public class UserController {
         userService.saveNewUser(regDto);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping(value = "validate-email-for-register/{email}")
+    public HttpEntity<Void> emailAlreadyExists(@PathVariable String email) {
+        if (userService.containsEmail(email)) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 }
