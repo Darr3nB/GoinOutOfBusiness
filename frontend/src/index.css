@@ -32,3 +32,12 @@
     top: 8px;
     right: 8px;
 }
+
+.visible-login-p {
+    visibility: visible;
+    color: red;
+}
+
+.invisible-login-p {
+    visibility: hidden;
+}
