@@ -27,7 +27,6 @@ export default function Registration() {
 
         await utility.apiPostWithDictionary(`/user/registration`, {
             'email': formData.get("email-field"),
-            'username': formData.get("username-field"),
             'password': formData.get("password-field"),
             'passwordAgain': formData.get("password-again-field"),
             'dateOfBirth': null,
@@ -70,17 +69,19 @@ export default function Registration() {
 
     return (
         <div>
-            <form onSubmit={event => performRegistration(event)}>
-                <input type="text" placeholder="Email address" name="email-field" onInput={event => checkEmail(event.target.value)} minLength="3"/>
-                <p className={regBtn === 0 ? 'invisible-email-p' : regBtn === 1 ? 'valid-email-p' : 'error-email-p'}>{emailPtagText}</p>
-                <input type="text" placeholder="Username" name="username-field" minLength="3"/>
-                <input type="text" placeholder="Password" name="password-field" minLength="3"/>
-                <input type="text" placeholder="Password again" name="password-again-field" minLength="3"/>
-                {/*TODO Date of birth*/}
-                <input type="file" accept=".jpg, .jpeg, .png" onChange={event => uploadImage(event)}/>
-                <Button text="Registration" status={!regBtn}/>
-            </form>
-
+            <h1 className="middle-text">Register to goob.hu</h1>
+            <div className="reg-form">
+                <form onSubmit={event => performRegistration(event)}>
+                    <input type="text" placeholder="Email address" name="email-field"
+                           onInput={event => checkEmail(event.target.value)} minLength="3"/>
+                    <p className={regBtn === 0 ? 'invisible-email-p' : regBtn === 1 ? 'valid-email-p' : 'error-email-p'}>{emailPtagText}</p>
+                    <input type="text" placeholder="Password" name="password-field" minLength="3"/>
+                    <input type="text" placeholder="Password again" name="password-again-field" minLength="3"/>
+                    {/*TODO Date of birth*/}
+                    <input type="file" accept=".jpg, .jpeg, .png" onChange={event => uploadImage(event)}/>
+                    <Button text="Registration" status={!regBtn}/>
+                </form>
+            </div>
         </div>
     );
 }

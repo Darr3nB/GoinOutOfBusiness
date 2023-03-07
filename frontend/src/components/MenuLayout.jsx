@@ -1,24 +1,17 @@
 import {Link} from "react-router-dom";
-import LoginModal from "./LoginModal";
 import {useState} from "react";
+import LoggedInMenuBar from "./LoggedInMenuBar";
+import LoggedOff from "./LoggedOff";
 
 export default function MenuLayout() {
-    const [openModal, setOpenModal] = useState(false);
-
-    // TODO Check if logged in.
-    const showAndHideLoginModal = (event) => {
-        event.preventDefault();
-        setOpenModal(!openModal);
-    }
+    const [loggedIn, setLoggedIn] = useState(false);
+    // TODO Check if logged in. If logged in, pass the user data to LoggedInMenuBar
+    // TODO add more buttons, like search, or products.
 
     return (
         <div>
-            <Link to={`/`}>Home</Link>
-            <button className="login-btn" onClick={event => showAndHideLoginModal(event)} type="button">Login</button>
-            <LoginModal open={openModal} closeModal={() => {
-                setOpenModal(false);
-            }}/>
-            <Link to={`/registration`}>Registration</Link>
+            <Link to={`/`} className="button-link">Home</Link>
+            {loggedIn ? <LoggedInMenuBar/> : <LoggedOff/>}
         </div>
     );
 }
