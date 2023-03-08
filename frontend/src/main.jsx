@@ -4,6 +4,9 @@ import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Index from "./routes";
 import HomePage from "./components/HomePage";
+import Registration from "./routes/Registration";
+import ZSooS from "./components/ZSooS";
+import Darren from "./components/Darren";
 import ProductView from "./routes/productView.jsx";
 
 const router = createBrowserRouter([
@@ -14,6 +17,23 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage/>
+            },
+            {
+                path: "/registration",
+                element: <Registration/>
+            },
+            {
+                path: "/developers",
+                children: [
+                    {
+                        path: "zsoos",
+                        element: <ZSooS/>
+                    },
+                    {
+                        path: "darren",
+                        element: <Darren/>
+                    }
+                ]
             },
             {
                 path:"/view-product/:productId",

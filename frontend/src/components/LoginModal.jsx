@@ -1,6 +1,7 @@
 import {utility} from "../utility.js";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import Button from "./Button";
 
 export default function LoginModal({open, closeModal}) {
     if (!open) {
@@ -9,7 +10,7 @@ export default function LoginModal({open, closeModal}) {
 
     const navigate = useNavigate();
     const [loginBtn, setLoginBtn] = useState(false);
-    const [loginPtag, setLoginPtag] = useState(false);
+    const [loginPtag, setLoginPtag] = useState(2);
 
 
     const performLogin = (event) => {
@@ -26,10 +27,15 @@ export default function LoginModal({open, closeModal}) {
     }
 
     const checkEmail = (email) => {
-        if (!utility.validateEmail(email)) {
-            setLoginPtag(true);
+        if (email.length === 0) {
+            setLoginPtag(2);
+            setLoginBtn(false);
+        } else if (!utility.validateEmail(email)) {
+            setLoginPtag(1);
+            setLoginBtn(false);
         } else {
-            setLoginPtag(false);
+            setLoginPtag(0);
+            setLoginBtn(true);
         }
     }
 
@@ -41,10 +47,12 @@ export default function LoginModal({open, closeModal}) {
                 <form onSubmit={event => performLogin(event)}>
                     <br/><input onInput={(event) => checkEmail(event.target.value)} type="text" placeholder="Email"
                                 name="email-field"/>
-                    <p className={loginPtag ? 'visible-login-p' : 'invisible-login-p'}>{loginPtag ? 'Invalid e-mail format' : ''}</p>
-                    <input type="text" placeholder="Password" name="password-field"/>
+                    <p className={loginPtag === 1 ? 'error-email-p' : loginPtag === 0 ? 'valid-email-p' : 'invisible-email-p'}>
+                        {loginPtag === 1 ? 'Invalid e-mail format.' : loginPtag === 0 ? 'Valid e-mail format.' : ''}
+                    </p>
+                    <input type="text" placeholder="Password" name="password-field" minLength="3"/>
                     <br/>
-                    <button>Login</button>
+                    <Button text="Login" status={!loginBtn}/>
                 </form>
             </div>
         </div>
