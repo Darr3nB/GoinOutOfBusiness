@@ -81,7 +81,7 @@
 
 .sidebar-left,
 .sidebar-right {
-    flex: 0 0 20%;
+    flex: 0 0 15%;
     background-color: gray;
 }
 
@@ -113,4 +113,14 @@
     background-color: lightgray;
     padding: 20px;
     width: 100%;
+}
+
+.product-card {
+    border: 3px solid black;
+    width: 200px;
+}
+
+.card-key-div {
+    display: inline-block;
+    margin: 5px;
 }
