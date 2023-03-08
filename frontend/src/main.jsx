@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage";
 import Registration from "./routes/Registration";
 import ZSooS from "./components/ZSooS";
 import Darren from "./components/Darren";
+import ProductView from "./routes/productView.jsx";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
                         element: <Darren/>
                     }
                 ]
+            },
+            {
+                path:"/view-product/:productId",
+                element: <ProductView/>
             }
         ]
     }
