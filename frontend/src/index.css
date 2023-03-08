@@ -73,3 +73,66 @@
     background-color: #0062cc;
     color: #fff;
 }
+
+.page-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar-left,
+.sidebar-right {
+    flex: 0 0 15%;
+    background-color: gray;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page-div {
+    width: 100%;
+    height: auto;
+    background-color: lightgray;
+    text-align: center;
+    padding: 20px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-color: lightgray;
+    padding: 20px;
+    width: 100%;
+}
+
+.product-card {
+    border: 3px solid black;
+    width: 150px;
+    transition: background-color 0.5s ease-in-out;
+    border-radius: 10%;
+}
+
+.product-card:hover {
+    background-color: #F2F2F2;
+    cursor: pointer;
+}
+
+.card-key-div {
+    display: inline-block;
+    margin: 5px;
+}
+
+.product-card-picture {
+    width: 140px;
+    border-radius: 10%;
+}
