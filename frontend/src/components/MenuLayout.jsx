@@ -5,7 +5,6 @@ import LoggedOff from "./LoggedOff";
 
 export default function MenuLayout() {
     const [loggedIn, setLoggedIn] = useState({});
-    // TODO Check if logged in. If logged in, pass the user data to LoggedInMenuBar
     // TODO add more buttons, like search, or products.
 
 
@@ -22,8 +21,9 @@ export default function MenuLayout() {
 
     return (
         <div>
+            <h1>Welcome {!loggedIn ? "visitor" : loggedIn.email}!</h1>
             <Link to={`/`} className="button-link">Home</Link>
-            {!loggedIn ? <LoggedOff/> : <LoggedInMenuBar/>}
+            {!loggedIn ? <LoggedOff/> : <LoggedInMenuBar user={loggedIn}/>}
         </div>
     );
 }

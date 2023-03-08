@@ -222,3 +222,7 @@
     width: 140px;
     border-radius: 10%;
 }
+
+.profile-picture {
+    width: 300px;
+}

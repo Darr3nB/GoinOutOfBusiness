@@ -8,6 +8,7 @@ import Registration from "./routes/Registration";
 import ZSooS from "./components/ZSooS";
 import Darren from "./components/Darren";
 import ProductView from "./routes/productView.jsx";
+import Profile from "./routes/Profile";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path:"/view-product/:productId",
                 element: <ProductView/>
+            },
+            {
+                path: "/profile",
+                element: <Profile/>
             }
         ]
     }

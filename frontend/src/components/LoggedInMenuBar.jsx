@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {utility} from "../utility.js";
 
-export default function LoggedInMenuBar() {
+export default function LoggedInMenuBar({user}) {
     const navigate = useNavigate();
 
     const logout = async (event) => {
@@ -19,7 +19,7 @@ export default function LoggedInMenuBar() {
     return (
         <span>
             <Link to={`/profile`} className="button-link">Profile</Link>
-            <button className="button-link" onClick={event => logout(event)}>Logout</button>
+            <button className="login-btn button-link" onClick={event => logout(event)}>Logout</button>
         </span>
     );
 }
