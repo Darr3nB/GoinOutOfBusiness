@@ -10,6 +10,7 @@ export default function LoggedOff() {
         setOpenModal(!openModal);
     }
 
+
     return (
         <span>
             <button className="login-btn button-link" onClick={event => showAndHideLoginModal(event)}

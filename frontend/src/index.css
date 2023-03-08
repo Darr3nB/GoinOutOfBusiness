@@ -25,6 +25,7 @@
 
 .login-btn {
     z-index: -1;
+    border: 1px solid transparent;
 }
 
 .closeOnModal {
@@ -151,6 +152,7 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .button-link:hover {

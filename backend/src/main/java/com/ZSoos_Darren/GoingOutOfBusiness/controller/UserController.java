@@ -3,6 +3,7 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
+import com.ZSoos_Darren.GoingOutOfBusiness.security.JwtUtil;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,14 +20,15 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "login")
-    public HttpEntity<Void> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
+    public HttpEntity<GoobUser> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
         if (!userService.validateProfile(loginDto)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         GoobUser user = userService.findUserByEMail(loginDto.getEmail());
-        userService.addUserDetailToCookies(user, response);
+        String token = JwtUtil.generateTokenWithUser(user);
+        userService.addJwtToCookies(token, response);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping(value = "logout")

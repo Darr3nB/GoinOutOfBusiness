@@ -13,7 +13,8 @@ import java.io.IOException;
 @Component
 public class AuthorizationFilter implements Filter {
 
-    private final String SECRET_KEY = SecretKeyGenerator.generateSecretKey(32);
+//    private final String SECRET_KEY = SecretKeyGenerator.generateSecretKey(32);
+    private final String SECRET_KEY = "very_secret";
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

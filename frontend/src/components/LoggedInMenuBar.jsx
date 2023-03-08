@@ -10,6 +10,7 @@ export default function LoggedInMenuBar() {
         await utility.apiGet(`/user/logout`)
             .then(response => {
                 if (response.ok) {
+                    localStorage.removeItem('user');
                     navigate(0);
                 }
             });
