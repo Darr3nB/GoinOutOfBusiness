@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/user': apiBaseUrl,
-      '/product': apiBaseUrl,
+      '/products': apiBaseUrl,
     }
   }
 })
