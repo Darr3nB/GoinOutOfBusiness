@@ -1,56 +1,21 @@
 import ProductCard from "./ProductCard";
+import {useEffect, useState} from "react";
+import {utility} from "../utility.js";
 
 export default function HomePage() {
-    const dummyData = [
-        {
-            'id': 0,
-            'name': 'Bubuka',
-            'description': 'very useful much wow',
-            'price': 99999,
-            'type': 'Other',
-            'inventory': 5
-        },
-        {
-            'id': 1,
-            'name': 'Cucuka',
-            'description': 'very useful much wow',
-            'price': 5555,
-            'type': 'Other',
-            'inventory': 1
-        },
-        {
-            'id': 1,
-            'name': 'Cucuka',
-            'description': 'very useful much wow',
-            'price': 5555,
-            'type': 'Other',
-            'inventory': 1
-        },
-        {
-            'id': 1,
-            'name': 'Cucuka',
-            'description': 'very useful much wow',
-            'price': 5555,
-            'type': 'Other',
-            'inventory': 1
-        },
-        {
-            'id': 1,
-            'name': 'Cucuka',
-            'description': 'very useful much wow',
-            'price': 5555,
-            'type': 'Other',
-            'inventory': 1
-        },
-        {
-            'id': 1,
-            'name': 'Cucuka',
-            'description': 'very useful much wow',
-            'price': 5555,
-            'type': 'Other',
-            'inventory': 1
-        },
-    ]
+    const [allProducts, setAllProducts] = useState([]);
+
+    useEffect(() => {
+        return async () => {
+            await utility.apiGet(`/products/list/0`)
+                .then(response => response.json())
+                .then(data => {
+                    setAllProducts(data.content);
+                })
+        };
+    }, []);
+
+
     return (<div>
             <h1 className="center-text">Going out of Business!</h1>
 
@@ -59,7 +24,7 @@ export default function HomePage() {
                 <div className="main-content">
                     <div>TODO MENU/SEARCH POINTS</div>
                     <div className="main-page-div">
-                        {dummyData.map(data => {
+                        {allProducts.map(data => {
                             return <div className="card-key-div" key={"key-" + data.id}><ProductCard product={data}/></div>
                         })}
                     </div>

@@ -13,7 +13,7 @@ export default function ProductCard({product}){
 
     return (
         <div className="product-card" onClick={event => redirectToProduct(event)}>
-            <img className="product-card-picture" src={utility.questionMarkPicture} alt="Picture of the product"/>
+            <img className="product-card-picture" src={product.picture ? product.picture : utility.questionMarkPicture} alt="Picture of the product"/>
             <p>Name: {product.name}</p>
             <p>Price: {product.price.toFixed(2)} Ft</p>
             <p>Type: {product.type}</p>
