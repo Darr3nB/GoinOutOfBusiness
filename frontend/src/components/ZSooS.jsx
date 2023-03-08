@@ -1,7 +1,7 @@
 export default function ZSooS() {
     return (
         <div>
-            <h1>Zoltán Soós</h1>
+            <h1>Soós Zoltán</h1>
             <img src="../src/assets/zolee.jpg" alt="Picture of Zolee"/>
             <br/><a href="#"><img src="../src/assets/facebook_icon.png" alt="Facebook icon" width="30px"/></a>
             <a href="#"><img src="../src/assets/twitter.jpg" alt="Twitter icon" width="30px"/></a>
