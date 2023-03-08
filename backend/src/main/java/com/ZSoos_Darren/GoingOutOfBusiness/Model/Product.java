@@ -19,6 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
+    @Column(columnDefinition = "VARCHAR")
     String description;
     BigDecimal price;
     @Enumerated(EnumType.STRING)
