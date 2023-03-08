@@ -49,7 +49,7 @@ function ProductView() {
                 </div>
             </div>
             <div id={'product-description'} className={'right-column'}>
-                {productData.description.repeat(10)}</div>
+                {productData.description}</div>
 
         </section>
     );
