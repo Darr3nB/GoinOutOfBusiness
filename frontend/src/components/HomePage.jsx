@@ -1,7 +1,6 @@
 import ProductCard from "./ProductCard";
 import {useEffect, useRef, useState} from "react";
 import {utility} from "../utility.js";
-import CheckBoxForSearch from "./CheckBoxForSearch.jsx";
 import {Link} from "react-router-dom";
 
 export default function HomePage() {
@@ -29,7 +28,24 @@ export default function HomePage() {
 
     const filterItems = (event) => {
         event.preventDefault();
-        // TODO api request by search then display
+        const formData = new FormData(event.currentTarget);
+        const category = formData.get('category') === "null" ? null : formData.get('category');
+        const name = formData.get('name-search-input').length <= 0 ? null : formData.get('name-search-input');
+        const from = formData.get('min-price-search-input') <= 0 ? 0 : formData.get('min-price-search-input');
+        const to = formData.get('max-price-search-input') <= 1 ? 99999999 : formData.get('max-price-search-input');
+        console.log("FROM: ", from)
+        console.log("TO: ", to)
+        if (from >= to) {
+            alert("Price range 'to' cannot be higher than 'from'!");
+            return;
+        }
+
+        utility.apiGet(`/products/0?name=${name}&from=${from}&to=${to}&order-by=${formData.get('order-by')}${category === null ? '' : '&category='+ {category}}`)
+            .then(response => {
+                if (response.ok) {
+                    // TODO setAllProducts from responseBody
+                }
+            });
     }
 
 
@@ -51,10 +67,13 @@ export default function HomePage() {
                                 <br/><input type="text" name="name-search-input" minLength="3"/>
 
                                 {/*TODO get all types from backend, list proper options based on that*/}
-                                <CheckBoxForSearch id="1" value="Console"/>
-                                <CheckBoxForSearch id="2" value="Household"/>
-                                <CheckBoxForSearch id="3" value="Electronics"/>
-                                <CheckBoxForSearch id="4" value="Other"/>
+                                <label htmlFor="category">Category: </label><br/>
+                                <select name="category" id="category">
+                                    <option value="null"></option>
+                                    <option value="household">Household</option>
+                                    <option value="console">Console</option>
+                                    <option value="electronics">Electronics</option>
+                                </select>
 
                                 {/*TODO make it as a slide*/}
                                 <p>Price range:</p>
@@ -63,6 +82,11 @@ export default function HomePage() {
                                        className="price-search-field"/>
                                 <br/><label htmlFor="max-price-search-input">To: </label>
                                 <input name="max-price-search-input" type="number" className="price-search-field"/>
+                                <br/>
+                                <select name="order-by" id="order-by">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
                                 <br/>
                                 <button>Search</button>
                             </form>
@@ -73,7 +97,6 @@ export default function HomePage() {
                             return <div className="card-key-div" key={"key-" + data.id}><ProductCard product={data}/>
                             </div>
                         })}
-                        {/*TODO jump to page X*/}
                         <div className="page-container">
                             <span className="page-number" onClick={() => turnPage(currentPageCount - 1)}> &lt; </span>
                             <span className="page-number"
