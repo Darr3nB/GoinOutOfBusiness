@@ -9,6 +9,7 @@ import ZSooS from "./components/ZSooS";
 import Darren from "./components/Darren";
 import ProductView from "./routes/productView.jsx";
 import Profile from "./routes/Profile";
+import AboutUs from "./routes/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
                 element: <Registration/>
             },
             {
+                path: "about-us",
+                element: <AboutUs/>
+            },
+            {
                 path: "/developers",
                 children: [
                     {
@@ -37,7 +42,7 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path:"/view-product/:productId",
+                path: "/view-product/:productId",
                 element: <ProductView/>
             },
             {

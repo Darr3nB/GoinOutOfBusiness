@@ -23,6 +23,7 @@ export default function MenuLayout() {
         <div>
             <h1>Welcome {!loggedIn ? "visitor" : loggedIn.email}!</h1>
             <Link to={`/`} className="button-link">Home</Link>
+            <Link to={`/about-us`} className="button-link">About us</Link>
             {!loggedIn ? <LoggedOff/> : <LoggedInMenuBar user={loggedIn}/>}
         </div>
     );
