@@ -1,6 +1,8 @@
 import ProductCard from "./ProductCard";
 import {useEffect, useRef, useState} from "react";
 import {utility} from "../utility.js";
+import CheckBoxForSearch from "./CheckBoxForSearch.jsx";
+import {Link} from "react-router-dom";
 
 export default function HomePage() {
     const [allProducts, setAllProducts] = useState([]);
@@ -25,34 +27,45 @@ export default function HomePage() {
         setCurrentPageCount(pageNumber);
     }
 
+    const filterItems = (event) => {
+        event.preventDefault();
+        // TODO api request by search then display
+    }
+
 
     return (
         <div>
             <h1 className="center-text">Going out of Business!</h1>
 
             <div className="page-wrapper">
-                <div className="sidebar-left middle-text">*Insert very creative add here.*</div>
+                <div className="sidebar-left middle-text">
+                    <Link to={`https://www.codecool.com`} target="_blank"><img src="../src/assets/hp_meme.jpg"
+                                                                               alt="meme" className="meme"/></Link>
+                </div>
                 <div className="main-content">
                     <div className="search-container">
                         <div className="search-bar">
-                            TODO MENU/SEARCH POINTS
-                            Search by:
-                            <label htmlFor="name-search-input">Name:</label>
-                            <input type="text" name="name-search-input" minLength="3"/>
+                            Filter
+                            <form onSubmit={event => filterItems(event)}>
+                                <label htmlFor="name-search-input">Name:</label>
+                                <br/><input type="text" name="name-search-input" minLength="3"/>
 
-                            {/*TODO get all types from backend, list proper options based on that*/}
-                            <label htmlFor="type-search-field">Type:</label>
-                            <select name="type-search-field" id="type-search-field">
-                                <option value="null"></option>
-                                <option value="console">Console</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="household">Household</option>
-                                <option value="other">Other</option>
-                            </select>
+                                {/*TODO get all types from backend, list proper options based on that*/}
+                                <CheckBoxForSearch id="1" value="Console"/>
+                                <CheckBoxForSearch id="2" value="Household"/>
+                                <CheckBoxForSearch id="3" value="Electronics"/>
+                                <CheckBoxForSearch id="4" value="Other"/>
 
-                            {/*TODO make it az a slide*/}
-                            <label htmlFor="min-price-search-input">Price range:</label>
-                            <input type="number" name="min-price-search-input"/> - <input name="max-price-search-input" type="number"/>
+                                {/*TODO make it as a slide*/}
+                                <p>Price range:</p>
+                                <label htmlFor="min-price-search-input">From: </label>
+                                <input type="number" name="min-price-search-input"
+                                       className="price-search-field"/>
+                                <br/><label htmlFor="max-price-search-input">To: </label>
+                                <input name="max-price-search-input" type="number" className="price-search-field"/>
+                                <br/>
+                                <button>Search</button>
+                            </form>
                         </div>
                     </div>
                     <div className="main-page-div">
@@ -60,7 +73,6 @@ export default function HomePage() {
                             return <div className="card-key-div" key={"key-" + data.id}><ProductCard product={data}/>
                             </div>
                         })}
-                        {/*TODO put them into smoll card and add some space between page numbers*/}
                         {/*TODO jump to page X*/}
                         <div className="page-container">
                             <span className="page-number" onClick={() => turnPage(currentPageCount - 1)}> &lt; </span>
@@ -74,7 +86,8 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-                <div className="sidebar-right middle-text">*Insert very creative add here.*</div>
+                <div className="sidebar-right middle-text"><Link to={`https://www.codecool.com`} target="_blank"><img
+                    src="../src/assets/kermit_meme.jpg" alt="meme" className="meme"/></Link></div>
             </div>
         </div>
     );

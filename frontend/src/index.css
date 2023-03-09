@@ -182,6 +182,7 @@
 .sidebar-left,
 .sidebar-right {
     flex: 0 0 15%;
+    background-color: grey;
 }
 
 .main-content {
@@ -276,4 +277,16 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.about-picture {
+    width: 600px;
+}
+
+.price-search-field {
+    width: 75px;
+}
+
+.meme {
+    width: 300px;
 }

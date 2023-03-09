@@ -5,7 +5,6 @@ import LoggedOff from "./LoggedOff";
 
 export default function MenuLayout() {
     const [loggedIn, setLoggedIn] = useState({});
-    // TODO add more buttons, like search, or products.
 
 
     useEffect(() => {
