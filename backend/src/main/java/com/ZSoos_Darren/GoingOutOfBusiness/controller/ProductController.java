@@ -86,4 +86,9 @@ public class ProductController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(items);
     }
+
+    @GetMapping("/get-categories")
+    public ProductType[] getAllPossibleCategories() {
+        return ProductType.class.getEnumConstants();
+    }
 }
