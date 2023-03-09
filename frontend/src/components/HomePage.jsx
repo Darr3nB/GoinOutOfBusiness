@@ -17,6 +17,14 @@ export default function HomePage() {
     const toRef = useRef();
     const directionRef = useRef();
 
+    const [filtered, setFiltered] = useState(false);
+
+    const categoryRef = useRef();
+    const searchNameRef = useRef();
+    const fromRef = useRef();
+    const toRef = useRef();
+    const directionRef = useRef();
+
     const getCategories = async () => {
         const response = await utility.apiGet(`/products/get-categories`);
         categories.current = await response.json();
