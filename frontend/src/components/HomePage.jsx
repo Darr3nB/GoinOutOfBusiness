@@ -39,7 +39,7 @@ export default function HomePage() {
             return;
         }
 
-        utility.apiGet(`/products/search/0?name=${name === null ? '' : name}&from=${from}&to=${to}&direction=${formData.get('order-by')}${category === null ? '' : '&category='+ {category}}`)
+        utility.apiGet(`/products/search/0?name=${name === null ? '' : name}&from=${from}&to=${to}&direction=${formData.get('order-by')}${category === null ? '' : `&category=${category}`}`)
             .then(response => {
                 if (response.ok) {
                     response.json().then(data => {
