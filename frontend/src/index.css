@@ -168,7 +168,6 @@
 .sidebar-left,
 .sidebar-right {
     flex: 0 0 15%;
-    background-color: gray;
 }
 
 .main-content {
@@ -176,6 +175,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 .main-page-div {
@@ -199,6 +199,7 @@
     background-color: lightgray;
     padding: 20px;
     width: 100%;
+    height: 1px;
 }
 
 .product-card {
@@ -225,4 +226,27 @@
 
 .profile-picture {
     width: 300px;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-number {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.page-number:hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, -10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }

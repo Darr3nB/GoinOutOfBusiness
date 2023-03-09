@@ -7,7 +7,7 @@ export default function Index() {
         <div>
             <MenuLayout/>
             <Outlet/>
-            {/*<Footer/>*/}
+            <Footer/>
         </div>
     );
 }

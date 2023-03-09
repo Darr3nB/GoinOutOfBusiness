@@ -40,12 +40,13 @@ export default function HomePage() {
                             </div>
                         })}
                         {/*TODO put them into smoll card and add some space between page numbers*/}
-                        <div>
-                            <span onClick={() => turnPage(currentPageCount - 1)}> &lt; </span>
-                            <span onClick={() => turnPage(currentPageCount - 1)}>{currentPageCount <= 1 ? null : currentPageCount - 1}</span>
-                            <span onClick={() => turnPage(currentPageCount)}>{currentPageCount}</span>
-                            <span onClick={() => turnPage(currentPageCount + 1)}>{currentPageCount + 1 > totalPageCount.current ? null : currentPageCount + 1}</span>
-                            <span onClick={() => turnPage(currentPageCount + 1)}> &gt; </span>
+                        {/*TODO jump to page X*/}
+                        <div className="page-container">
+                            <span className="page-number" onClick={() => turnPage(currentPageCount - 1)}> &lt; </span>
+                            <span className="page-number" onClick={() => turnPage(currentPageCount - 1)}>{currentPageCount <= 1 ? null : currentPageCount - 1}</span>
+                            <span className="page-number" onClick={() => turnPage(currentPageCount)}>{currentPageCount}</span>
+                            <span className="page-number" onClick={() => turnPage(currentPageCount + 1)}>{currentPageCount + 1 > totalPageCount.current ? null : currentPageCount + 1}</span>
+                            <span className="page-number" onClick={() => turnPage(currentPageCount + 1)}> &gt; </span>
                         </div>
                     </div>
                 </div>
