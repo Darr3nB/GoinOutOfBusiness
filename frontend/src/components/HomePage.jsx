@@ -8,6 +8,7 @@ export default function HomePage() {
     const [currentPageCount, setCurrentPageCount] = useState(1);
     const totalPageCount = useRef(0);
     const categories = useRef([]);
+    const [pageTurned, setPageTurned] = useState(true);
 
     const getCategories = async () => {
         const response = await utility.apiGet(`/products/get-categories`);
@@ -24,13 +25,14 @@ export default function HomePage() {
 
         fetchData();
         getCategories();
-    }, [currentPageCount]);
+    }, [pageTurned]);
 
     const turnPage = (pageNumber) => {
         if (pageNumber === null || currentPageCount === pageNumber || pageNumber <= 0 || pageNumber > totalPageCount.current) {
             return;
         }
         setCurrentPageCount(pageNumber);
+        setPageTurned(!pageTurned);
     }
 
     const filterItems = (event) => {
@@ -51,7 +53,7 @@ export default function HomePage() {
                 if (response.ok) {
                     response.json().then(data => {
                         setAllProducts(data.content);
-                        // TODO update page number without triggering useEffect
+                        setCurrentPageCount(1);
                     })
                 }
             });
