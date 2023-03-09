@@ -16,7 +16,7 @@ export default function ProductCard({product}){
             <img className="product-card-picture" src={product.picture ? product.picture : utility.questionMarkPicture} alt="Picture of the product"/>
             <p>Name: {product.name}</p>
             <p>Price: {product.price.toFixed(2)} Ft</p>
-            <p>Type: {product.type}</p>
+            <p>Type: {product.type.charAt(0).toUpperCase() + product.type.slice(1).toLowerCase()}</p>
             <p>In stock: {product.inventory}</p>
         </div>
     );

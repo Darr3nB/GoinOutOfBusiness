@@ -7,6 +7,12 @@ export default function HomePage() {
     const [allProducts, setAllProducts] = useState([]);
     const [currentPageCount, setCurrentPageCount] = useState(1);
     const totalPageCount = useRef(0);
+    const categories = useRef([]);
+
+    const getCategories = async () => {
+        const response = await utility.apiGet(`/products/get-categories`);
+        categories.current = await response.json();
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -17,6 +23,7 @@ export default function HomePage() {
         }
 
         fetchData();
+        getCategories();
     }, [currentPageCount]);
 
     const turnPage = (pageNumber) => {
@@ -39,7 +46,7 @@ export default function HomePage() {
             return;
         }
 
-        utility.apiGet(`/products/search/0?name=${name === null ? '' : name}&from=${from}&to=${to}&direction=${formData.get('order-by')}${category === null ? '' : `&category=${category}`}`)
+        utility.apiGet(`/products/search/0?name=${name === null ? '' : name}&from=${from}&to=${to}&direction=${formData.get('direction')}${category === null ? '' : `&category=${category}`}`)
             .then(response => {
                 if (response.ok) {
                     response.json().then(data => {
@@ -72,9 +79,9 @@ export default function HomePage() {
                                 <label htmlFor="category">Category: </label><br/>
                                 <select name="category" id="category">
                                     <option value="null"></option>
-                                    <option value="household">Household</option>
-                                    <option value="console">Console</option>
-                                    <option value="electronics">Electronics</option>
+                                    {categories.current?.map((cat, index) => {
+                                        return <option key={`cat-key${index}`} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase()}</option>
+                                    })}
                                 </select>
 
                                 {/*TODO make it as a slide*/}
@@ -85,9 +92,10 @@ export default function HomePage() {
                                 <br/><label htmlFor="max-price-search-input">To: </label>
                                 <input name="max-price-search-input" type="number" className="price-search-field"/>
                                 <br/>
-                                <select name="order-by" id="order-by">
-                                    <option value="asc">Ascending</option>
+                                <label htmlFor="direction">Direction: </label>
+                                <br/><select name="order-by" id="direction">
                                     <option value="desc">Descending</option>
+                                    <option value="asc">Ascending</option>
                                 </select>
                                 <br/>
                                 <button>Search</button>
