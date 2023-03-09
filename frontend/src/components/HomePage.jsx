@@ -32,9 +32,8 @@ export default function HomePage() {
         const category = formData.get('category') === "null" ? null : formData.get('category');
         const name = formData.get('name-search-input').length <= 0 ? null : formData.get('name-search-input');
         const from = formData.get('min-price-search-input') <= 0 ? 0 : formData.get('min-price-search-input');
-        const to = formData.get('max-price-search-input') <= 1 ? 99999999 : formData.get('max-price-search-input');
-        console.log("FROM: ", from)
-        console.log("TO: ", to)
+        const to = formData.get('max-price-search-input') <= 1 ? Number.MAX_SAFE_INTEGER : formData.get('max-price-search-input');
+        
         if (from >= to) {
             alert("Price range 'to' cannot be higher than 'from'!");
             return;
