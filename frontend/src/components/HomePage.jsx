@@ -39,10 +39,13 @@ export default function HomePage() {
             return;
         }
 
-        utility.apiGet(`/products/search/0?name=${name}&from=${from}&to=${to}&direction=${formData.get('order-by')}${category === null ? '' : '&category='+ {category}}`)
+        utility.apiGet(`/products/search/0?name=${name === null ? '' : name}&from=${from}&to=${to}&direction=${formData.get('order-by')}${category === null ? '' : '&category='+ {category}}`)
             .then(response => {
                 if (response.ok) {
-                    // TODO setAllProducts from responseBody
+                    response.json().then(data => {
+                        setAllProducts(data.content);
+                        // TODO update page number without triggering useEffect
+                    })
                 }
             });
     }
