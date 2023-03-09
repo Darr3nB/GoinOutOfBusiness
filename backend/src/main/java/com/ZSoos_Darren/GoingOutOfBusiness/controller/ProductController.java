@@ -36,12 +36,11 @@ public class ProductController {
             @PathVariable int page,
             @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
             @RequestParam(name = "direction", defaultValue = "desc") String direction,
-            @RequestParam(name = "per-page", defaultValue = "20") int productPerPage,
-            @RequestParam(name = "from", defaultValue = "0") int priceFrom) {
+            @RequestParam(name = "per-page", defaultValue = "20") int productPerPage) {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getPageOfAllProducts(page,productPerPage,orderBy,direction));
     }
 
-    @GetMapping("/list/{page}")
+    @GetMapping("/search/{page}")
     public ResponseEntity<Page<Product>> getAllProductsPage(
             @PathVariable int page,
             @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
@@ -49,23 +48,15 @@ public class ProductController {
             @RequestParam(name = "per-page", defaultValue = "20") int productPerPage,
             @RequestParam(name = "from", defaultValue = "0") BigDecimal priceFrom,
             @RequestParam(name = "to") BigDecimal priceTo,
-            @RequestParam(name = "name") String searchName,
-            @RequestParam(name = "category") ProductType category) {
-        if(searchName.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsForTypeAndPriceBetween(category,priceFrom, priceTo, page,productPerPage,orderBy,direction));
-        return ResponseEntity.status(HttpStatus.OK).body(productService.getProductForTypeAndPriceBetweenAndNameContainsIgnoreCase(category,priceFrom,priceTo,searchName,page,productPerPage,orderBy,direction));
-    }
-
-    @GetMapping("/list/{page}")
-    public ResponseEntity<Page<Product>> getAllProductsPage(
-            @PathVariable int page,
-            @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
-            @RequestParam(name = "direction", defaultValue = "desc") String direction,
-            @RequestParam(name = "per-page", defaultValue = "20") int productPerPage,
-            @RequestParam(name = "from", defaultValue = "0") BigDecimal priceFrom,
-            @RequestParam(name = "to") BigDecimal priceTo,
-            @RequestParam(name = "name") String searchName) {
-        if(searchName.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByPriceBetween(priceFrom,priceTo,page,productPerPage,orderBy,direction));
-        return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByPriceBetweenAndNameContainsIgnoreCase(priceFrom,priceTo,searchName,page,productPerPage,orderBy,direction));
+            @RequestParam(name = "name", defaultValue = "") String searchName,
+            @RequestParam(name = "category", defaultValue = "") String category) {
+        if(category.isEmpty()) {
+            if(searchName.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByPriceBetween(priceFrom,priceTo,page,productPerPage,orderBy,direction));
+            return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByPriceBetweenAndNameContainsIgnoreCase(priceFrom,priceTo,searchName,page,productPerPage,orderBy,direction));
+        } else {
+            if(searchName.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsForTypeAndPriceBetween(ProductType.valueOf(category),priceFrom, priceTo, page,productPerPage,orderBy,direction));
+            return ResponseEntity.status(HttpStatus.OK).body(productService.getProductForTypeAndPriceBetweenAndNameContainsIgnoreCase(ProductType.valueOf(category),priceFrom,priceTo,searchName,page,productPerPage,orderBy,direction));
+        }
     }
 
     @PostMapping("/add-product")
