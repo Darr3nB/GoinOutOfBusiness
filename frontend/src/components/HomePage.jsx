@@ -16,14 +16,7 @@ export default function HomePage() {
     const fromRef = useRef();
     const toRef = useRef();
     const directionRef = useRef();
-
-    const [filtered, setFiltered] = useState(false);
-
-    const categoryRef = useRef();
-    const searchNameRef = useRef();
-    const fromRef = useRef();
-    const toRef = useRef();
-    const directionRef = useRef();
+    const orderColumnRef = useRef();
 
     const getCategories = async () => {
         const response = await utility.apiGet(`/products/get-categories`);
@@ -69,13 +62,14 @@ export default function HomePage() {
         const from = fromRef.current.value.length <= 0 ? 0 : fromRef.current.value;
         const to = toRef.current.value.length <= 1 ? Number.MAX_SAFE_INTEGER : toRef.current.value;
         const direction = directionRef.current.value;
+        const orderBy = orderColumnRef.current.value;
 
         if (from >= to) {
             alert("Price range 'to' cannot be higher than 'from'!");
             return;
         }
 
-        const data = await utility.apiGet(`/products/search/${currentPageCount - 1}?name=${name === null ? '' : name}&from=${from}&to=${to}&direction=${direction}${category === null ? '' : `&category=${category}`}`)
+        const data = await utility.apiGet(`/products/search/${currentPageCount - 1}?name=${name === null ? '' : name}&order-by=${orderBy}&from=${from}&to=${to}&direction=${direction}${category === null ? '' : `&category=${category}`}`)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -122,8 +116,15 @@ export default function HomePage() {
                                 <input name="max-price-search-input" type="number" className="price-search-field"
                                        ref={toRef}/>
                                 <br/>
+                                <label htmlFor={"order-by"}>Order By:</label>
+                                <select name={"order-by"} ref={orderColumnRef}>
+                                    <option value={"name"}>Name</option>
+                                    <option value={"price"}>Price</option>
+                                    <option value={"type"}>Category</option>
+                                    <option value={"inventory"}>Inventory</option>
+                                </select>
                                 <label htmlFor="direction">Direction: </label>
-                                <br/><select name="order-by" id="direction" ref={directionRef}>
+                                <br/><select name="direction" id="direction" ref={directionRef}>
                                 <option value="desc">Descending</option>
                                 <option value="asc">Ascending</option>
                             </select>
