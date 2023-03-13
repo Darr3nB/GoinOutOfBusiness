@@ -270,6 +270,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    background-color: lightgrey;
+    border: 1px solid black;
 }
 
 .search-bar {
