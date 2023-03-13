@@ -77,7 +77,7 @@ public class UserController {
 
     @GetMapping(value = "validate-email-for-register/{email}")
     public HttpEntity<Void> emailAlreadyExists(@PathVariable String email) {
-        if (userService.containsEmail(email)) {
+        if (!userService.containsEmail(email)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

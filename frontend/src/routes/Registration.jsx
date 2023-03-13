@@ -7,7 +7,7 @@ export default function Registration() {
     const navigate = useNavigate();
     const [uploadedImage, setImage] = useState(null);
     const [regBtn, setRegBtn] = useState(0);
-    const [emailPtagText, setEmailPtagText] = useState("ASDASD");
+    const [emailPtagText, setEmailPtagText] = useState("");
     const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
 
 
@@ -46,6 +46,11 @@ export default function Registration() {
     }
 
     const checkEmail = async (email) => {
+        if (email.length <= 0) {
+            setEmailPtagText("");
+            setRegBtn(0);
+            return;
+        }
         await utility.apiGet(`/user/validate-email-for-register/${email}`)
             .then(response => {
                 if (response.ok) {
@@ -55,10 +60,7 @@ export default function Registration() {
                 }
             });
 
-        if (email.length <= 0) {
-            setEmailPtagText("");
-            setRegBtn(0);
-        } else if (!utility.validateEmail(email) || emailAlreadyExists) {
+        if (emailAlreadyExists) {
             setEmailPtagText("Invalid e-mail or is already registered.");
             setRegBtn(2);
         } else {
@@ -73,8 +75,8 @@ export default function Registration() {
             <div className="reg-form">
                 <form onSubmit={event => performRegistration(event)}>
                     <input type="text" placeholder="Email address" name="email-field"
-                           onInput={event => checkEmail(event.target.value)} minLength="3"/>
-                    <p className={regBtn === 0 ? 'invisible-email-p' : regBtn === 1 ? 'valid-email-p' : 'error-email-p'}>{emailPtagText}</p>
+                           onChange={event => checkEmail(event.target.value)} minLength="3"/>
+                    <p className={regBtn === 1 ? 'valid-email-p' : regBtn === 2 ? 'error-email-p' : 'invisible-email-p'}>{emailPtagText}</p>
                     <input type="text" placeholder="Password" name="password-field" minLength="3"/>
                     <input type="text" placeholder="Password again" name="password-again-field" minLength="3"/>
                     {/*TODO Date of birth*/}

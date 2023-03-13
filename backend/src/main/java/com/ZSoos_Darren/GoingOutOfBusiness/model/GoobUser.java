@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class GoobUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String email;
