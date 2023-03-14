@@ -9,9 +9,9 @@ export default function MenuLayout() {
 
     useEffect(() => {
         return () => {
-            if (localStorage.hasOwnProperty('user')){
+            if (localStorage.hasOwnProperty('user')) {
                 setLoggedIn(JSON.parse(localStorage.getItem('user')));
-            }else {
+            } else {
                 setLoggedIn(false);
             }
         };
@@ -20,10 +20,13 @@ export default function MenuLayout() {
 
     return (
         <div>
-            <h1 className="fancy-font">Welcome {!loggedIn ? "visitor" : loggedIn.email}!</h1>
-            <Link to={`/`} className="button-link margin">Home</Link>
-            <Link to={`/about-us`} className="button-link margin">About us</Link>
-            {!loggedIn ? <LoggedOff/> : <LoggedInMenuBar user={loggedIn}/>}
+            <h1 className="fancy-font white-text middle-text">Welcome {!loggedIn ? "visitor" : loggedIn.email} to Going
+                out of Business web shop!</h1>
+            <div className="menu-bar middle-text">
+                <Link to={`/`} className="button-link margin">Home</Link>
+                <Link to={`/about-us`} className="button-link margin">About us</Link>
+                {!loggedIn ? <LoggedOff/> : <LoggedInMenuBar user={loggedIn}/>}
+            </div>
         </div>
     );
 }

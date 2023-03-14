@@ -15,7 +15,8 @@ export default function Profile() {
 
 
     return (
-        <div className="middle-text">
+        <div className="middle-text white-text big-letters">
+            <h1 className="fancy-font">Profile page</h1>
             <img className="profile-picture" src={user?.profilePicture} alt="User's profile picture."/>
             <div>E-mail address: {user?.email}</div>
             <div>Registration date: {user?.dateOfRegistration}</div>

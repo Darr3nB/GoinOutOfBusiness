@@ -82,8 +82,6 @@ export default function HomePage() {
 
     return (
         <div>
-            <h1 className="center-text fancy-font">Going out of Business!</h1>
-
             <div className="page-wrapper">
                 <div className="sidebar-left middle-text">
                     <Link to={`https://www.codecool.com`} target="_blank"><img src="../src/assets/hp_meme.jpg"
@@ -91,14 +89,13 @@ export default function HomePage() {
                     {/*<Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"*/}
                     {/*                                              className="meme"/></Link>*/}
                 </div>
-                <div className="search-container">
+                <div className="search-container white-text">
                     <div className="search-bar">
                         <span className="filter">Filter</span>
                         <form onSubmit={event => filterItems(event)}>
                             <label htmlFor="name-search-input">Name:</label>
                                 <br/><input type="text" name="name-search-input" minLength="3" ref={searchNameRef}/>
 
-                            {/*TODO get all types from backend, list proper options based on that*/}
                             <br/><label htmlFor="category">Category: </label><br/>
                                 <select name="category" id="category" ref={categoryRef}>
                                     <option value="null"></option>
