@@ -53,7 +53,7 @@ export default function Registration() {
 
         if (!utility.validateEmail(email)) {
             setEmailPtagText("Invalid e-mail or is already registered.");
-            setRegBtn(2);
+            setRegBtn(0);
             return;
         }
 
@@ -64,7 +64,7 @@ export default function Registration() {
                     setRegBtn(1);
                 } else if (response.status === 403) {
                     setEmailPtagText("Invalid e-mail or is already registered.");
-                    setRegBtn(2);
+                    setRegBtn(0);
                 }
             });
     }
@@ -76,7 +76,7 @@ export default function Registration() {
                 <form onSubmit={event => performRegistration(event)}>
                     <input type="text" placeholder="Email address" name="email-field"
                            onInput={event => checkEmail(event.target.value)} minLength="3"/>
-                    <p className={regBtn === 1 ? 'valid-email-p' : regBtn === 2 ? 'error-email-p' : 'invisible-email-p'}>{emailPtagText}</p>
+                    <p className={regBtn === 1 ? 'valid-email-p' : regBtn === 0 ? 'error-email-p' : 'invisible-email-p'}>{emailPtagText}</p>
                     <input type="text" placeholder="Password" name="password-field" minLength="3"/>
                     <input type="text" placeholder="Password again" name="password-again-field" minLength="3"/>
                     {/*TODO Date of birth*/}
