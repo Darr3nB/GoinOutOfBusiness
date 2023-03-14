@@ -93,8 +93,8 @@ export default function HomePage() {
                     <div className="search-bar">
                         <span className="filter">Filter</span>
                         <form onSubmit={event => filterItems(event)}>
-                            <label htmlFor="name-search-input">Name:</label>
-                                <br/><input type="text" name="name-search-input" minLength="3" ref={searchNameRef}/>
+                            {/*<label htmlFor="name-search-input">Name:</label>*/}
+                                <br/><input type="text" name="name-search-input" minLength="3" ref={searchNameRef} placeholder="Name"/>
 
                             <br/><label htmlFor="category">Category: </label><br/>
                                 <select name="category" id="category" ref={categoryRef}>
@@ -106,13 +106,11 @@ export default function HomePage() {
                                 </select>
 
                             {/*TODO make it as a slide*/}
-                            <p><span>Price range:</span>
-                                <br/><label htmlFor="min-price-search-input">From: </label>
-                                <input type="number" name="min-price-search-input"
-                                       className="price-search-field" ref={fromRef}/>
-                                <br/><label htmlFor="max-price-search-input">To: </label>
+                            <p><span>Price range:</span></p>
+                                <p><input type="number" name="min-price-search-input"
+                                       className="price-search-field" ref={fromRef} placeholder="From"/>
                                 <input name="max-price-search-input" type="number" className="price-search-field"
-                                       ref={toRef}/></p>
+                                       ref={toRef} placeholder="To"/></p>
                             <br/>
                             <label htmlFor={"order-by"}>Order By:</label>
                                 <select name={"order-by"} ref={orderColumnRef}>
