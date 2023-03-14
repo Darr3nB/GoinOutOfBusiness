@@ -8,7 +8,6 @@ export default function Registration() {
     const [uploadedImage, setImage] = useState(null);
     const [regBtn, setRegBtn] = useState(0);
     const [emailPtagText, setEmailPtagText] = useState("");
-    const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
 
 
     function passwordMatcher(password, password2) {
@@ -51,22 +50,23 @@ export default function Registration() {
             setRegBtn(0);
             return;
         }
+
+        if (!utility.validateEmail(email)) {
+            setEmailPtagText("Invalid e-mail or is already registered.");
+            setRegBtn(2);
+            return;
+        }
+
         await utility.apiGet(`/user/validate-email-for-register/${email}`)
             .then(response => {
                 if (response.ok) {
-                    setEmailAlreadyExists(true);
+                    setEmailPtagText("E-mail available.");
+                    setRegBtn(1);
                 } else if (response.status === 403) {
-                    setEmailAlreadyExists(false);
+                    setEmailPtagText("Invalid e-mail or is already registered.");
+                    setRegBtn(2);
                 }
             });
-
-        if (emailAlreadyExists) {
-            setEmailPtagText("Invalid e-mail or is already registered.");
-            setRegBtn(2);
-        } else {
-            setEmailPtagText("E-mail available.");
-            setRegBtn(1);
-        }
     }
 
     return (
@@ -75,7 +75,7 @@ export default function Registration() {
             <div className="reg-form">
                 <form onSubmit={event => performRegistration(event)}>
                     <input type="text" placeholder="Email address" name="email-field"
-                           onChange={event => checkEmail(event.target.value)} minLength="3"/>
+                           onInput={event => checkEmail(event.target.value)} minLength="3"/>
                     <p className={regBtn === 1 ? 'valid-email-p' : regBtn === 2 ? 'error-email-p' : 'invisible-email-p'}>{emailPtagText}</p>
                     <input type="text" placeholder="Password" name="password-field" minLength="3"/>
                     <input type="text" placeholder="Password again" name="password-again-field" minLength="3"/>
