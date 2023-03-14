@@ -16,26 +16,25 @@ export default function Registration() {
 
     const performRegistration = async (event) => {
         event.preventDefault();
-        console.log(uploadedImage);
-        // const formData = new FormData(event.currentTarget);
-        // const profilePicture = uploadedImage === null ? utility.questionMarkPicture : uploadedImage;
-        //
-        // if (!passwordMatcher(formData.get("password-field"), formData.get("password-again-field"))) {
-        //     alert("Passwords must match!");
-        //     return;
-        // }
-        //
-        // await utility.apiPostWithDictionary(`/user/registration`, {
-        //     'email': formData.get("email-field"),
-        //     'password': formData.get("password-field"),
-        //     'passwordAgain': formData.get("password-again-field"),
-        //     'dateOfBirth': null,
-        //     'profilePicture': profilePicture,
-        // }).then(response => {
-        //     if (response.ok) {
-        //         navigate(0);
-        //     }
-        // })
+        const formData = new FormData(event.currentTarget);
+        const profilePicture = uploadedImage === null ? utility.questionMarkPicture : uploadedImage;
+
+        if (!passwordMatcher(formData.get("password-field"), formData.get("password-again-field"))) {
+            alert("Passwords must match!");
+            return;
+        }
+
+        await utility.apiPostWithDictionary(`/user/registration`, {
+            'email': formData.get("email-field"),
+            'password': formData.get("password-field"),
+            'passwordAgain': formData.get("password-again-field"),
+            'dateOfBirth': null,
+            'profilePicture': profilePicture,
+        }).then(response => {
+            if (response.ok) {
+                navigate(0);
+            }
+        })
     }
 
     const uploadImage = async (event) => {
