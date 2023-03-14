@@ -88,6 +88,8 @@ export default function HomePage() {
                 <div className="sidebar-left middle-text">
                     <Link to={`https://www.codecool.com`} target="_blank"><img src="../src/assets/hp_meme.jpg"
                                                                                alt="meme" className="meme"/></Link>
+                    <Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"
+                                                                  className="meme"/></Link>
                 </div>
                 <div className="search-container">
                     <div className="search-bar">
@@ -150,8 +152,12 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-                <div className="sidebar-right middle-text"><Link to={`https://www.codecool.com`} target="_blank"><img
-                    src="../src/assets/kermit_meme.jpg" alt="meme" className="meme"/></Link></div>
+                <div className="sidebar-right middle-text">
+                    <Link to={`https://www.codecool.com`} target="_blank"><img
+                        src="../src/assets/kermit_meme.jpg" alt="meme" className="meme"/></Link>
+                    <Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"
+                                                                  className="meme"/></Link>
+                </div>
             </div>
         </div>
     );

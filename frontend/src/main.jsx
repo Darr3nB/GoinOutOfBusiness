@@ -10,6 +10,7 @@ import Darren from "./components/Darren";
 import ProductView from "./routes/productView.jsx";
 import Profile from "./routes/Profile";
 import AboutUs from "./routes/AboutUs";
+import HornyJail from "./components/HornyJail";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,9 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage/>
+            },{
+                path: "/horny-jail",
+                element: <HornyJail/>
             },
             {
                 path: "/registration",
