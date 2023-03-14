@@ -93,8 +93,7 @@ export default function HomePage() {
                     <div className="search-bar">
                         <span className="filter">Filter</span>
                         <form onSubmit={event => filterItems(event)}>
-                            {/*<label htmlFor="name-search-input">Name:</label>*/}
-                                <br/><input type="text" name="name-search-input" minLength="3" ref={searchNameRef} placeholder="Name"/>
+                                <br/><p><input type="text" name="name-search-input" minLength="3" ref={searchNameRef} placeholder="Name"/></p>
 
                             <br/><label htmlFor="category">Category: </label><br/>
                                 <select name="category" id="category" ref={categoryRef}>
@@ -108,7 +107,7 @@ export default function HomePage() {
                             {/*TODO make it as a slide*/}
                             <p><span>Price range:</span></p>
                                 <p><input type="number" name="min-price-search-input"
-                                       className="price-search-field" ref={fromRef} placeholder="From"/>
+                                       className="price-search-field from" ref={fromRef} placeholder="From"/>
                                 <input name="max-price-search-input" type="number" className="price-search-field"
                                        ref={toRef} placeholder="To"/></p>
                             <br/>
@@ -120,12 +119,12 @@ export default function HomePage() {
                                     <option value={"inventory"}>Inventory</option>
                                 </select>
                             <br/><label htmlFor="direction">Direction: </label>
-                                <br/><select name="direction" id="direction" ref={directionRef}>
+                                <select name="direction" id="direction" ref={directionRef}>
                                     <option value="desc">Descending</option>
                                     <option value="asc">Ascending</option>
                                 </select>
                             <br/>
-                            <button>Search</button>
+                            <p><button>Search</button></p>
                         </form>
                     </div>
                 </div>
