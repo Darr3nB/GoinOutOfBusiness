@@ -82,14 +82,14 @@ export default function HomePage() {
 
     return (
         <div>
-            <h1 className="center-text">Going out of Business!</h1>
+            <h1 className="center-text fancy-font">Going out of Business!</h1>
 
             <div className="page-wrapper">
                 <div className="sidebar-left middle-text">
                     <Link to={`https://www.codecool.com`} target="_blank"><img src="../src/assets/hp_meme.jpg"
                                                                                alt="meme" className="meme"/></Link>
-                    <Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"
-                                                                  className="meme"/></Link>
+                    {/*<Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"*/}
+                    {/*                                              className="meme"/></Link>*/}
                 </div>
                 <div className="search-container">
                     <div className="search-bar">
@@ -140,23 +140,23 @@ export default function HomePage() {
                             return <div className="card-key-div" key={"key-" + data.id}><ProductCard product={data}/>
                             </div>
                         })}
-                        <div className="page-container">
-                            <span className="page-number" onClick={() => turnPage(currentPageCount - 1)}> &lt; </span>
-                            <span className="page-number"
-                                  onClick={() => turnPage(currentPageCount - 1)}>{currentPageCount <= 1 ? null : currentPageCount - 1}</span>
-                            <span className="page-number"
-                                  onClick={() => turnPage(currentPageCount)}>{currentPageCount}</span>
-                            <span className="page-number"
-                                  onClick={() => turnPage(currentPageCount + 1)}>{currentPageCount + 1 > totalPageCount.current ? null : currentPageCount + 1}</span>
-                            <span className="page-number" onClick={() => turnPage(currentPageCount + 1)}> &gt; </span>
-                        </div>
+                    </div>
+                    <div className="page-container">
+                        <span className="page-number" onClick={() => turnPage(currentPageCount - 1)}> &lt; </span>
+                        <span className="page-number"
+                              onClick={() => turnPage(currentPageCount - 1)}>{currentPageCount <= 1 ? null : currentPageCount - 1}</span>
+                        <span className="page-number"
+                              onClick={() => turnPage(currentPageCount)}>{currentPageCount}</span>
+                        <span className="page-number"
+                              onClick={() => turnPage(currentPageCount + 1)}>{currentPageCount + 1 > totalPageCount.current ? null : currentPageCount + 1}</span>
+                        <span className="page-number" onClick={() => turnPage(currentPageCount + 1)}> &gt; </span>
                     </div>
                 </div>
                 <div className="sidebar-right middle-text">
                     <Link to={`https://www.codecool.com`} target="_blank"><img
                         src="../src/assets/kermit_meme.jpg" alt="meme" className="meme"/></Link>
-                    <Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"
-                                                                  className="meme"/></Link>
+                    {/*<Link to={`/horny-jail`} target="_blank"><img src="../src/assets/hot_mom.jpeg" alt="hot_mom_meme"*/}
+                    {/*                                              className="meme"/></Link>*/}
                 </div>
             </div>
         </div>
