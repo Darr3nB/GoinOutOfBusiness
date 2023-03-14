@@ -93,42 +93,42 @@ export default function HomePage() {
                 </div>
                 <div className="search-container">
                     <div className="search-bar">
-                        Filter
+                        <span className="filter">Filter</span>
                         <form onSubmit={event => filterItems(event)}>
                             <label htmlFor="name-search-input">Name:</label>
-                            <br/><input type="text" name="name-search-input" minLength="3" ref={searchNameRef}/>
+                                <br/><input type="text" name="name-search-input" minLength="3" ref={searchNameRef}/>
 
                             {/*TODO get all types from backend, list proper options based on that*/}
                             <br/><label htmlFor="category">Category: </label><br/>
-                            <select name="category" id="category" ref={categoryRef}>
-                                <option value="null"></option>
-                                {categories.current?.map((cat, index) => {
-                                    return <option key={`cat-key${index}`}
-                                                   value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase()}</option>
-                                })}
-                            </select>
+                                <select name="category" id="category" ref={categoryRef}>
+                                    <option value="null"></option>
+                                    {categories.current?.map((cat, index) => {
+                                        return <option key={`cat-key${index}`}
+                                                       value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase()}</option>
+                                    })}
+                                </select>
 
                             {/*TODO make it as a slide*/}
-                            <p>Price range:</p>
-                            <label htmlFor="min-price-search-input">From: </label>
-                            <input type="number" name="min-price-search-input"
-                                   className="price-search-field" ref={fromRef}/>
-                            <br/><label htmlFor="max-price-search-input">To: </label>
-                            <input name="max-price-search-input" type="number" className="price-search-field"
-                                   ref={toRef}/>
+                            <p><span>Price range:</span>
+                                <br/><label htmlFor="min-price-search-input">From: </label>
+                                <input type="number" name="min-price-search-input"
+                                       className="price-search-field" ref={fromRef}/>
+                                <br/><label htmlFor="max-price-search-input">To: </label>
+                                <input name="max-price-search-input" type="number" className="price-search-field"
+                                       ref={toRef}/></p>
                             <br/>
                             <label htmlFor={"order-by"}>Order By:</label>
-                            <select name={"order-by"} ref={orderColumnRef}>
-                                <option value={"name"}>Name</option>
-                                <option value={"price"}>Price</option>
-                                <option value={"type"}>Category</option>
-                                <option value={"inventory"}>Inventory</option>
-                            </select>
+                                <select name={"order-by"} ref={orderColumnRef}>
+                                    <option value={"name"}>Name</option>
+                                    <option value={"price"}>Price</option>
+                                    <option value={"type"}>Category</option>
+                                    <option value={"inventory"}>Inventory</option>
+                                </select>
                             <br/><label htmlFor="direction">Direction: </label>
-                            <br/><select name="direction" id="direction" ref={directionRef}>
-                            <option value="desc">Descending</option>
-                            <option value="asc">Ascending</option>
-                        </select>
+                                <br/><select name="direction" id="direction" ref={directionRef}>
+                                    <option value="desc">Descending</option>
+                                    <option value="asc">Ascending</option>
+                                </select>
                             <br/>
                             <button>Search</button>
                         </form>

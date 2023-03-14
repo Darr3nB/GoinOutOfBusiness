@@ -18,8 +18,8 @@ export default function LoggedInMenuBar({user}) {
 
     return (
         <span>
-            <Link to={`/profile`} className="button-link">Profile</Link>
-            <button className="login-btn button-link" onClick={event => logout(event)}>Logout</button>
+            <Link to={`/profile`} className="button-link margin">Profile</Link>
+            <button className="login-btn button-link margin" onClick={event => logout(event)}>Logout</button>
         </span>
     );
 }

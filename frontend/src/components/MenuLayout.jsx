@@ -20,9 +20,9 @@ export default function MenuLayout() {
 
     return (
         <div>
-            <h1>Welcome {!loggedIn ? "visitor" : loggedIn.email}!</h1>
-            <Link to={`/`} className="button-link">Home</Link>
-            <Link to={`/about-us`} className="button-link">About us</Link>
+            <h1 className="fancy-font">Welcome {!loggedIn ? "visitor" : loggedIn.email}!</h1>
+            <Link to={`/`} className="button-link margin">Home</Link>
+            <Link to={`/about-us`} className="button-link margin">About us</Link>
             {!loggedIn ? <LoggedOff/> : <LoggedInMenuBar user={loggedIn}/>}
         </div>
     );

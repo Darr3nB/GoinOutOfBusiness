@@ -303,3 +303,20 @@
 .horny-div {
     background-color: lightgrey;
 }
+
+.fancy-font{
+    font-family: "Franklin Gothic Book", sans-serif;
+}
+
+.filter {
+    font-size: 2em;
+    margin: auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.margin {
+    margin: 5px;
+}

@@ -13,13 +13,13 @@ export default function LoggedOff() {
 
     return (
         <span>
-            <button className="login-btn button-link" onClick={event => showAndHideLoginModal(event)}
+            <button className="login-btn button-link margin" onClick={event => showAndHideLoginModal(event)}
                     type="button">Login
             </button>
             <LoginModal open={openModal} closeModal={() => {
                 setOpenModal(false);
             }}/>
-            <Link to={`/registration`} className="button-link">Registration</Link>
+            <Link to={`/registration`} className="button-link margin">Registration</Link>
         </span>
     );
 }
