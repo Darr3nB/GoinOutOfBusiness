@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.CartItem;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import lombok.AllArgsConstructor;

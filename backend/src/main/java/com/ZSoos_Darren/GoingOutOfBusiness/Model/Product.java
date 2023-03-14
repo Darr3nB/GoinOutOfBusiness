@@ -25,6 +25,8 @@ public class Product {
     @Enumerated(EnumType.STRING)
     ProductType type;
     Integer inventory;
+    @Column(columnDefinition = "VARCHAR")
+    private String picture;
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.dao;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

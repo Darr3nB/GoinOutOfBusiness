@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.service;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.dao.ProductDao;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
