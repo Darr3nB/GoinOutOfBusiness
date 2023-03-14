@@ -1,4 +1,4 @@
-package com.ZSoos_Darren.GoingOutOfBusiness.Model;
+package com.ZSoos_Darren.GoingOutOfBusiness.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
