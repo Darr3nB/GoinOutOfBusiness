@@ -337,6 +337,7 @@ input {
     border-left-style: hidden;
     border-bottom: 2px solid white;
     outline: none;
+    color: white;
 }
 
 input::placeholder {

@@ -32,7 +32,7 @@ export default function Registration() {
             'profilePicture': profilePicture,
         }).then(response => {
             if (response.ok) {
-                navigate(0);
+                navigate("/");
             }
         })
     }
