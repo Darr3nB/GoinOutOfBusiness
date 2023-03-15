@@ -1,6 +1,6 @@
 export default function AboutUs() {
     return (
-        <div className="middle-text">
+        <div className="middle-text white-text">
             <h1>About us</h1>
             <img className="about-picture" src="../src/assets/conf_room.jpg" alt="Conference room picture"/>
             <p>
