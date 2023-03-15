@@ -1,8 +1,8 @@
 export default function Darren() {
     return (
-        <div>
-            <h1>Németh "Darren" Dávid</h1>
-            <img src="../src/assets/darren.jpg" alt="Picture of szanil"/>
+        <div className="white-text fancy-font big-letters">
+            <h1 className="middle-text">Németh "Darren" Dávid</h1>
+            <div className="middle-text"><img src="../src/assets/darren.jpg" alt="Picture of szanil"/></div>
             <br/><a href="#"><img src="../src/assets/facebook_icon.png" alt="Facebook icon" width="30px"/></a>
             <a href="#"><img src="../src/assets/twitter.jpg" alt="Twitter icon" width="30px"/></a>
             <a href="#"><img src="../src/assets/instagram_icon.png" alt="Instagram icon" width="30px"/></a>

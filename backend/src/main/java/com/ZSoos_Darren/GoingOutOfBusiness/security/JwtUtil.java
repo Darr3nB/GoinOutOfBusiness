@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JwtUtil {
-    private static final String SECRET_KEY = SecretKeyGenerator.generateSecretKey(32); // Generate a 256-bit key
+//    private static final String SECRET_KEY = SecretKeyGenerator.generateSecretKey(32); // Generate a 256-bit key
+    private static final String SECRET_KEY = "very_secret";
 
     public static String generateToken(String userId) {
         Date now = new Date();
@@ -28,9 +29,7 @@ public class JwtUtil {
         Date expiryDate = new Date(now.getTime() + 3600000); // Token expires in 1 hour
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getId());
-        claims.put("email", user.getEmail());
-        claims.put("role", user.getRole());
+        claims.put("user", user);
 
         return Jwts.builder()
                 .setSubject(user.getEmail())

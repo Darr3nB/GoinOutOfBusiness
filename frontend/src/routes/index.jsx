@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 
 export default function Index() {
     return (
-        <div>
+        <div className="black">
             <MenuLayout/>
             <Outlet/>
             <Footer/>

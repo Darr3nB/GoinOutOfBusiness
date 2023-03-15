@@ -12,12 +12,12 @@ export default function ProductCard({product}){
     }
 
     return (
-        <div className="product-card" onClick={event => redirectToProduct(event)}>
+        <div className="product-card white-text" onClick={event => redirectToProduct(event)}>
             <img className="product-card-picture" src={product.picture ? product.picture : utility.questionMarkPicture} alt="Picture of the product"/>
-            <p>Name: {product.name}</p>
-            <p>Price: {product.price.toFixed(2)} Ft</p>
-            <p>Type: {product.type}</p>
-            <p>In stock: {product.inventory}</p>
+            <p><span className="bold">Name:</span> {product.name}</p>
+            <p><span className="bold">Price:</span> {product.price.toFixed(2)} Ft</p>
+            <p><span className="bold">Type:</span> {product.type.charAt(0).toUpperCase() + product.type.slice(1).toLowerCase()}</p>
+            <p><span className="bold">In stock:</span> {product.inventory}</p>
         </div>
     );
 }

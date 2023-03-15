@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -32,19 +34,23 @@ public class UserService implements CommandLineRunner {
         return passwordAgent.passwordMatcher(foundUserByEMail.getPassword(), loginDto.getPassword()) && !foundUserByEMail.getEmail().equals("DELETED_USER");
     }
 
-    public void addUserDetailToCookies(GoobUser user, HttpServletResponse response) {
-        Cookie theCookie = new Cookie("goobEMailAddress", user.getEmail());
-        theCookie.setMaxAge(Utility.oneDayForCookies);
-        theCookie.setPath("/");
+    public void addJwtToCookies(String token, HttpServletResponse response) {
+        String[] splitToken = token.split("\\.");
+        Cookie signature = new Cookie("signature", splitToken[2]);
 
-        response.addCookie(theCookie);
+        signature.setMaxAge(-1);
+        signature.setPath("/");
+        signature.setHttpOnly(true);
+
+        response.addCookie(signature);
     }
 
+    // TODO figure out if client side cookie delete is enough or not.
     public void removeUserDetailFromCookies(HttpServletResponse response) {
-        Cookie theCookie = new Cookie("goobEMailAddress", null);
-        theCookie.setMaxAge(0);
-        theCookie.setPath("/");
-        response.addCookie(theCookie);
+        Cookie signature = new Cookie("signature", null);
+        signature.setMaxAge(0);
+        signature.setPath("/");
+        response.addCookie(signature);
     }
 
     public String getEMailFromCookies(HttpServletRequest request) {
@@ -83,7 +89,7 @@ public class UserService implements CommandLineRunner {
 
         newRegistration.setEmail(regDto.getEmail());
         newRegistration.setPassword(passwordAgent.hashPassword(regDto.getPassword()));
-        newRegistration.setDateOfBirth(regDto.getDateOfBrith());
+        newRegistration.setDateOfBirth((Timestamp) regDto.getDateOfBrith());
         if (regDto.getProfilePicture() == null) {
             newRegistration.setProfilePicture(Utility.questionMarkPicture);
         } else {

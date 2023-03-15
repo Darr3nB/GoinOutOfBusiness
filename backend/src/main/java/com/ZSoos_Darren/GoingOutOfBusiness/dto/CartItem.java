@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.dto;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import lombok.Data;
 
 import java.math.BigDecimal;

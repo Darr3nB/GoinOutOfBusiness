@@ -7,8 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -16,7 +15,7 @@ import java.util.Date;
 public class GoobUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String email;
@@ -25,9 +24,9 @@ public class GoobUser {
     @Column(columnDefinition = "timestamp default current_timestamp")
     @CreationTimestamp
     @JsonFormat(pattern = "YY.MM.dd HH:mm")
-    private LocalDateTime dateOfRegistration;
+    private Timestamp dateOfRegistration;
     @JsonFormat(pattern = "YY.MM.dd")
-    private Date dateOfBirth;
+    private Timestamp dateOfBirth;
     @Column(columnDefinition = "VARCHAR")
     private String profilePicture;
     @Enumerated(EnumType.STRING)

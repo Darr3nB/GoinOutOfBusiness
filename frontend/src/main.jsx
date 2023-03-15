@@ -8,6 +8,9 @@ import Registration from "./routes/Registration";
 import ZSooS from "./components/ZSooS";
 import Darren from "./components/Darren";
 import ProductView from "./routes/productView.jsx";
+import Profile from "./routes/Profile";
+import AboutUs from "./routes/AboutUs";
+import HornyJail from "./components/HornyJail";
 
 const router = createBrowserRouter([
     {
@@ -17,10 +20,17 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage/>
+            },{
+                path: "/horny-jail",
+                element: <HornyJail/>
             },
             {
                 path: "/registration",
                 element: <Registration/>
+            },
+            {
+                path: "about-us",
+                element: <AboutUs/>
             },
             {
                 path: "/developers",
@@ -36,8 +46,12 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path:"/view-product/:productId",
+                path: "/view-product/:productId",
                 element: <ProductView/>
+            },
+            {
+                path: "/profile",
+                element: <Profile/>
             }
         ]
     }

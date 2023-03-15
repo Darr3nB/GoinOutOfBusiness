@@ -25,6 +25,7 @@
 
 .login-btn {
     z-index: -1;
+    border: 1px solid transparent;
 }
 
 .closeOnModal {
@@ -68,9 +69,11 @@
         height: 32px;
     }
 }
+
 .left-column {
     float: left;
 }
+
 .rigth-column {
     float: right;
 }
@@ -81,47 +84,59 @@
     margin-top: 10vh;
     padding: 10px;
 }
+
 .fake-img {
     background-color: goldenrod;
     color: black;
     height: 300px;
     width: 400px;
 }
+
 #product-category {
     text-decoration: none;
     color: lightblue;
 }
+
 #product-category:hover {
     color: cornflowerblue;
     transition-duration: 0.5s;
 }
+
 #product-header-container {
     position: relative;
     width: 100%;
 }
+
 .right {
     text-align: right;
 }
+
 .large-text {
     font-size: 1.5em;
 }
+
 .small-text {
     font-size: 0.8em;
 }
+
 .centered {
     position: relative;
     margin-left: auto;
     margin-right: auto;
 }
+
 .green {
     color: green;
 }
+
 .red {
     color: red;
 }
+
 .yellow {
     color: yellow;
 }
+
 .header {
     font-size: 2em;
 }
@@ -151,6 +166,7 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .button-link:hover {
@@ -166,20 +182,20 @@
 .sidebar-left,
 .sidebar-right {
     flex: 0 0 15%;
-    background-color: gray;
+    background-color: black;
 }
 
 .main-content {
-    flex: 1;
-    display: flex;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 100px;
 }
 
 .main-page-div {
-    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
     height: auto;
-    background-color: lightgray;
+    background-color: #001219;
     text-align: center;
     padding: 20px;
 }
@@ -189,25 +205,18 @@
 }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    background-color: lightgray;
-    padding: 20px;
-    width: 100%;
+    background-color: #212529;
 }
 
 .product-card {
-    border: 3px solid black;
     width: 150px;
     transition: background-color 0.5s ease-in-out;
     border-radius: 10%;
+    min-height: 300px;
 }
 
 .product-card:hover {
-    background-color: #F2F2F2;
+    background-color: #14213d;
     cursor: pointer;
 }
 
@@ -219,4 +228,127 @@
 .product-card-picture {
     width: 140px;
     border-radius: 10%;
+    height: 100px;
+}
+
+.profile-picture {
+    width: 300px;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #001219;
+}
+
+.page-number {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.page-number:hover {
+    cursor: pointer;
+    transform: translate3d(0, 0, -10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #001219;
+    border: 1px solid black;
+    height: 350px;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.about-picture {
+    width: 600px;
+}
+
+.price-search-field {
+    width: 75px;
+}
+
+.meme {
+    width: 300px;
+}
+
+.horny-p-tag {
+    font-size: 50px;
+    color: red;
+}
+
+.horny-div {
+    background-color: lightgrey;
+}
+
+.fancy-font {
+    font-family: "Franklin Gothic Book", sans-serif;
+}
+
+.white-text {
+    color: white;
+}
+
+.filter {
+    font-size: 2em;
+    margin: auto;
+}
+
+.bold {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.margin {
+    margin: 5px;
+}
+
+body {
+    background-color: black;
+}
+
+.menu-bar {
+    background-color: #007bff;
+}
+
+.big-letters {
+    font-size: 25px;
+}
+
+input {
+    background-color: #001219;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom: 2px solid white;
+    outline: none;
+    color: white;
+}
+
+input::placeholder {
+    color: white;
+}
+
+.from {
+    border-right-style: solid;
+}
+
+select {
+    color: white;
+    background-color: #001219;
 }
