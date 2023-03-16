@@ -2,8 +2,10 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
+import com.ZSoos_Darren.GoingOutOfBusiness.helper.Utility;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.security.JwtUtil;
+import com.ZSoos_Darren.GoingOutOfBusiness.service.EmailService;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     UserService userService;
+    EmailService emailService;
 
     @PostMapping(value = "login")
     public HttpEntity<GoobUser> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
@@ -71,6 +74,8 @@ public class UserController {
         }
 
         userService.saveNewUser(regDto);
+
+        emailService.sendSimpleMessage(regDto.getEmail(), "Successfully registered to Going out of Business", Utility.regMessage(regDto.getEmail()));
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
