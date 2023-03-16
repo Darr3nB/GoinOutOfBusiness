@@ -39,7 +39,7 @@ function ProductView() {
                       className={'small-text'}>{categoryName}</Link>
             </div>
             <div className={'left-column'}>
-                <div id={'lightbox'} className={'fake-img'}></div>
+                <div id={'lightbox'} className={'fake-img'}><img src={productData?.picture} alt="product_pic" className="fake-img"/></div>
                 <div id={'product-buy-box'}>
                     <button id={'add-to-cart'}>Add to cart</button>
                     <span id={'product-price'} className={'right'}>{productData.price.toFixed(2)}</span>

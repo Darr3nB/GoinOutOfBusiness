@@ -2,7 +2,10 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Login;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
+import com.ZSoos_Darren.GoingOutOfBusiness.helper.Utility;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
+import com.ZSoos_Darren.GoingOutOfBusiness.security.JwtUtil;
+import com.ZSoos_Darren.GoingOutOfBusiness.service.EmailService;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,16 +20,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     UserService userService;
+    EmailService emailService;
 
     @PostMapping(value = "login")
-    public HttpEntity<Void> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
+    public HttpEntity<GoobUser> performLogin(@RequestBody Login loginDto, HttpServletResponse response) {
         if (!userService.validateProfile(loginDto)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         GoobUser user = userService.findUserByEMail(loginDto.getEmail());
-        userService.addUserDetailToCookies(user, response);
+        String token = JwtUtil.generateTokenWithUser(user);
+        userService.addJwtToCookies(token, response);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping(value = "logout")
@@ -70,12 +75,14 @@ public class UserController {
 
         userService.saveNewUser(regDto);
 
+        emailService.sendSimpleMessage(regDto.getEmail(), "Successfully registered to Going out of Business", Utility.regMessage(regDto.getEmail()));
+
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping(value = "validate-email-for-register/{email}")
     public HttpEntity<Void> emailAlreadyExists(@PathVariable String email) {
-        if (userService.containsEmail(email)) {
+        if (!userService.containsEmail(email)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

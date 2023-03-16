@@ -13,15 +13,18 @@ export default function LoginModal({open, closeModal}) {
     const [loginPtag, setLoginPtag] = useState(2);
 
 
-    const performLogin = (event) => {
+    const performLogin = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
 
-        utility.apiPostWithDictionary(`/user/login`,
-            {'email': formData.get('username-field'), 'password': formData.get('password-field')})
+        await utility.apiPostWithDictionary(`/user/login`,
+            {'email': formData.get('email-field'), 'password': formData.get('password-field')})
             .then(response => {
                 if (response.ok) {
-                    navigate(0);
+                    response.json().then(data => {
+                        localStorage.setItem('user', JSON.stringify(data));
+                        navigate(0);
+                    })
                 }
             })
     }

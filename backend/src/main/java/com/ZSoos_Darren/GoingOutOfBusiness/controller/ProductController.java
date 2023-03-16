@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.CartItem;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -39,6 +40,25 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getPageOfAllProducts(page,productPerPage,orderBy,direction));
     }
 
+    @GetMapping("/search/{page}")
+    public ResponseEntity<Page<Product>> getAllProductsPage(
+            @PathVariable int page,
+            @RequestParam(name = "order-by", defaultValue = "id") String orderBy,
+            @RequestParam(name = "direction", defaultValue = "desc") String direction,
+            @RequestParam(name = "per-page", defaultValue = "20") int productPerPage,
+            @RequestParam(name = "from", defaultValue = "0") BigDecimal priceFrom,
+            @RequestParam(name = "to") BigDecimal priceTo,
+            @RequestParam(name = "name", defaultValue = "") String searchName,
+            @RequestParam(name = "category", defaultValue = "") String category) {
+        if(category.isEmpty()) {
+            if(searchName.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByPriceBetween(priceFrom,priceTo,page,productPerPage,orderBy,direction));
+            return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByPriceBetweenAndNameContainsIgnoreCase(priceFrom,priceTo,searchName,page,productPerPage,orderBy,direction));
+        } else {
+            if(searchName.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsForTypeAndPriceBetween(ProductType.valueOf(category),priceFrom, priceTo, page,productPerPage,orderBy,direction));
+            return ResponseEntity.status(HttpStatus.OK).body(productService.getProductForTypeAndPriceBetweenAndNameContainsIgnoreCase(ProductType.valueOf(category),priceFrom,priceTo,searchName,page,productPerPage,orderBy,direction));
+        }
+    }
+
     @PostMapping("/add-product")
     public ResponseEntity<Void> addProduct(@RequestBody Product newProduct) {
         // TODO: 2023. 03. 01. Check for admin role for this specific route
@@ -65,5 +85,10 @@ public class ProductController {
             element.setDataFromProduct(product);
         }
         return ResponseEntity.status(HttpStatus.OK).body(items);
+    }
+
+    @GetMapping("/get-categories")
+    public ProductType[] getAllPossibleCategories() {
+        return ProductType.class.getEnumConstants();
     }
 }

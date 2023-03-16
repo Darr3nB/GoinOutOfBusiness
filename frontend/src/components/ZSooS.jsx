@@ -1,8 +1,8 @@
 export default function ZSooS() {
     return (
-        <div>
-            <h1>Soós Zoltán</h1>
-            <img src="../src/assets/zolee.jpg" alt="Picture of Zolee"/>
+        <div className="white-text fancy-font big-letters">
+            <h1 className="middle-text">Soós Zoltán</h1>
+            <div className="middle-text"><img src="../src/assets/zolee.jpg" alt="Picture of Zolee"/></div>
             <br/><a href="#"><img src="../src/assets/facebook_icon.png" alt="Facebook icon" width="30px"/></a>
             <a href="#"><img src="../src/assets/twitter.jpg" alt="Twitter icon" width="30px"/></a>
             <a href="#"><img src="../src/assets/instagram_icon.png" alt="Instagram icon" width="30px"/></a>

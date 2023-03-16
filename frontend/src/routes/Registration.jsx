@@ -7,8 +7,7 @@ export default function Registration() {
     const navigate = useNavigate();
     const [uploadedImage, setImage] = useState(null);
     const [regBtn, setRegBtn] = useState(0);
-    const [emailPtagText, setEmailPtagText] = useState("ASDASD");
-    const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
+    const [emailPtagText, setEmailPtagText] = useState("");
 
 
     function passwordMatcher(password, password2) {
@@ -33,7 +32,7 @@ export default function Registration() {
             'profilePicture': profilePicture,
         }).then(response => {
             if (response.ok) {
-                navigate(0);
+                navigate("/");
             }
         })
     }
@@ -46,25 +45,28 @@ export default function Registration() {
     }
 
     const checkEmail = async (email) => {
-        await utility.apiGet(`/user/validate-email-for-register/${email}`)
-            .then(response => {
-                if (response.ok) {
-                    setEmailAlreadyExists(true);
-                } else if (response.status === 403) {
-                    setEmailAlreadyExists(false);
-                }
-            });
-
         if (email.length <= 0) {
             setEmailPtagText("");
             setRegBtn(0);
-        } else if (!utility.validateEmail(email) || emailAlreadyExists) {
-            setEmailPtagText("Invalid e-mail or is already registered.");
-            setRegBtn(2);
-        } else {
-            setEmailPtagText("E-mail available.");
-            setRegBtn(1);
+            return;
         }
+
+        if (!utility.validateEmail(email)) {
+            setEmailPtagText("Invalid e-mail or is already registered.");
+            setRegBtn(0);
+            return;
+        }
+
+        await utility.apiGet(`/user/validate-email-for-register/${email}`)
+            .then(response => {
+                if (response.ok) {
+                    setEmailPtagText("E-mail available.");
+                    setRegBtn(1);
+                } else if (response.status === 403) {
+                    setEmailPtagText("Invalid e-mail or is already registered.");
+                    setRegBtn(0);
+                }
+            });
     }
 
     return (
@@ -74,7 +76,7 @@ export default function Registration() {
                 <form onSubmit={event => performRegistration(event)}>
                     <input type="text" placeholder="Email address" name="email-field"
                            onInput={event => checkEmail(event.target.value)} minLength="3"/>
-                    <p className={regBtn === 0 ? 'invisible-email-p' : regBtn === 1 ? 'valid-email-p' : 'error-email-p'}>{emailPtagText}</p>
+                    <p className={regBtn === 1 ? 'valid-email-p' : regBtn === 0 ? 'error-email-p' : 'invisible-email-p'}>{emailPtagText}</p>
                     <input type="text" placeholder="Password" name="password-field" minLength="3"/>
                     <input type="text" placeholder="Password again" name="password-again-field" minLength="3"/>
                     {/*TODO Date of birth*/}
