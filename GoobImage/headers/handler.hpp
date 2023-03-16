@@ -15,7 +15,7 @@ class handler
 {
 public:
     handler();
-    handler(utility::string_t url, filesystem::path product_image_path);
+    handler(utility::string_t url);
     virtual ~handler();
 
     pplx::task<void>open() { return m_listener.open(); }
@@ -24,13 +24,11 @@ public:
 protected:
 
 private:
-    void handle_get(http_request message);
-    void handle_put(http_request message);
-    void handle_post(http_request message);
-    void handle_delete(http_request message);
+    static void handle_get(const http_request& message);
+    static void handle_post(const http_request& message);
+    static void handle_delete(const http_request& message);
     void handle_error(pplx::task<void>& t);
     http_listener m_listener;
-    filesystem::path product_dir_path_;
 };
 
 #endif // HANDLER_H
