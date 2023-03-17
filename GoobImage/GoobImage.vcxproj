@@ -112,6 +112,11 @@
     <ClInclude Include="headers\handler.hpp" />
     <ClInclude Include="headers\stdafx.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="HTMLPage.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
