@@ -72,26 +72,83 @@ void handler::handle_get(const http_request& message)
 
     }
 };
-
 //
 // A POST request
 //
 void handler::handle_post(const http_request& message)
 {
-    ucout << message.to_string() << endl;
-
-    message.reply(http::status_codes::OK);
-    /*if(const auto paths = http::uri::split_path(http::uri::decode(message.relative_uri().path())); paths[0] == U("product"))
+    struct m_file
     {
-	    if(const auto content_type = message.headers().content_type(); content_type == U("multipart/form-data"))
-	    {
-		    
-	    }
+        std::string extension;
+        std::string raw_data = "";
+    };
+
+    ucout << message.to_string() << endl;
+    auto istream1 = message.body();
+
+    container_buffer<std::string> buffer;
+    istream1.read_to_end(buffer).get();
+
+    // Split the contents of the buffer into lines
+    std::string contents = buffer.collection();
+    std::stringstream ss(contents);
+    std::string line;
+
+    std::string file_name;
+
+
+    std::vector<std::string> linesInStream;
+
+    while (std::getline(ss, line)) {
+        linesInStream.push_back(line);
     }
 
-    message.reply(http::status_codes::BadRequest);
-    return;*/
-};
+    int file_count = 0;
+    std::vector<m_file> files;
+    int data_begin_index;
+    int data_end_index = 0;
+    for(int i = 2; i < linesInStream.size(); i++)
+    {
+	    if(linesInStream[i].find("image/jpeg")!=string::npos)
+	    {
+            file_count++;
+            files.push_back(m_file());
+            files.at(file_count - 1).extension = ".jpg";
+            data_begin_index = i + 2;
+	    }
+        if (linesInStream[i].find("image/png") != string::npos)
+        {
+            file_count++;
+            files.push_back(m_file());
+            files.at(file_count - 1).extension = ".png";
+            data_begin_index = i + 2;
+        }
+        if (linesInStream[i].starts_with("----"))
+        {
+            data_end_index = i - 1;
+        }
+        if(data_end_index> data_begin_index)
+        {
+	        for(int j = data_begin_index; j < data_end_index; j++)
+	        {
+                files.at(file_count - 1).raw_data.append(linesInStream[j] + '\n');
+	        }
+            std::ofstream out_file(std::to_string(file_count) + files.at(file_count - 1).extension, std::ios::binary);
+            out_file << files.at(file_count - 1).raw_data;
+            out_file.close();
+        }
+
+    }
+
+    http_response response(status_codes::Created);
+    /*json::value js = json::value::array();
+
+    for (int i = 0; i < names.size(); i++) {
+        js[i] = json::value::parse(names[i]);
+    }
+    response.set_body(js);*/
+    message.reply(response);
+}
 
 ////
 // A DELETE request
