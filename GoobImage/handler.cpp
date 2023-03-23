@@ -80,20 +80,20 @@ void handler::handle_post(const http_request& message)
     ucout << message.to_string() << endl;
 
     
-    //auto names = 
+    auto names = 
 	file_handler::save_files(message.body());
 
-    //string json_string = "[";
-    //for(int i = 0; i < names.size()-1; i++)
-    //{
-    //    json_string += names[i] + ",";
-    //}
-    //json_string += names.back() + "]";
+    string json_string = "[";
+    for(int i = 0; i < names.size()-1; i++)
+    {
+        json_string += "\"" + names[i] + "\",";
+    }
+    json_string += "\"" + names.back() + "\"]";
 
 
     http_response response(status_codes::Created);
-    //response.headers().set_content_type(U("application/json"));
-    //response.set_body(json_string);
+    response.headers().set_content_type(U("application/json"));
+    response.set_body(json_string);
     message.reply(response);
 }
 
