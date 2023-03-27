@@ -2,8 +2,6 @@
 //
 
 #include <iostream>
-
-#include "./headers/stdafx.hpp"
 #include "./headers/handler.hpp"
 
 using namespace std;
@@ -15,8 +13,8 @@ using namespace http::experimental::listener;
 using namespace web;
 using namespace web::http;
 
-std::unique_ptr<handler> g_httpHandler;
-const string product_image_path = "product";
+std::unique_ptr<handler> product_http_handler;
+const string_t product_image_path = U("product");
 
 
 void on_initialize(const string_t& address)
@@ -27,8 +25,8 @@ void on_initialize(const string_t& address)
 
 
     auto addr = uri.to_uri().to_string();
-    g_httpHandler = std::unique_ptr<handler>(new handler(addr));
-    g_httpHandler->open().wait();
+    product_http_handler = std::unique_ptr<handler>(new handler(addr, product_image_path));
+    product_http_handler->open().wait();
 
     ucout << utility::string_t(U("Listening for requests at: ")) << addr << std::endl;
 
@@ -37,7 +35,7 @@ void on_initialize(const string_t& address)
 
 void on_shutdown()
 {
-    g_httpHandler->close().wait();
+    product_http_handler->close().wait();
     return;
 }
 
@@ -56,6 +54,7 @@ int main(int argc, char* argv[])
 
     utility::string_t address = U("http://127.0.0.1:");
     address.append(port);
+    address.append(U("/product"));
 
     on_initialize(address);
     std::cout << "Press ENTER to exit." << std::endl;

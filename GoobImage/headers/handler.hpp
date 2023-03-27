@@ -1,9 +1,6 @@
-#ifndef HANDLER_H
-#define HANDLER_H
-#include <iostream>
-#include "stdafx.hpp"
-#include "filesystem.hpp"
+#include <cpprest/http_listener.h>
 
+#include "file_handler.hpp"
 
 using namespace std;
 using namespace web;
@@ -15,7 +12,7 @@ class handler
 {
 public:
     handler();
-    handler(utility::string_t url);
+    handler(string_t url, string_t image_folder_path);
     virtual ~handler();
 
     pplx::task<void>open() { return m_listener.open(); }
@@ -24,11 +21,10 @@ public:
 protected:
 
 private:
-    static void handle_get(const http_request& message);
-    static void handle_post(const http_request& message);
-    static void handle_delete(const http_request& message);
+    void handle_get(const http_request& message);
+    void handle_post(const http_request& message);
+    void handle_delete(const http_request& message);
     void handle_error(pplx::task<void>& t);
     http_listener m_listener;
+    file_handler image_handler_;
 };
-
-#endif // HANDLER_H
