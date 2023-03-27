@@ -103,14 +103,13 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="file_handler.cpp" />
     <ClCompile Include="GoobImage.cpp" />
     <ClCompile Include="handler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\filesystem.hpp" />
     <ClInclude Include="headers\file_handler.hpp" />
     <ClInclude Include="headers\handler.hpp" />
-    <ClInclude Include="headers\stdafx.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="HTMLPage.htm">

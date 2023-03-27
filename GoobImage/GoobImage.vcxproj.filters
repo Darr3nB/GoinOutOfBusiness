@@ -21,18 +21,15 @@
     <ClCompile Include="handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\filesystem.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\file_handler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="headers\handler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\stdafx.hpp">
+    <ClInclude Include="headers\file_handler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
