@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio">
+<TITLE></TITLE>
+</HEAD>
+<BODY>
+BRUH
+<form action="javascript:sub()">
+    <label for="file">Select a file:</label>
+    <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png">
+    <br>
+    <button type="submit">Upload</button>
+</form>
+<script>
+    function sub() {
+        console.log("ooooooooohhhhhhhh IM SUUUUUUUUUUUBBBBBBBBBBBBBING OOOOOOOOOOOOOOOOOOOOOHHHHHHH");
+        var input = document.querySelector('input[type="file"]');
+
+        var data = new FormData();
+        data.append('file', input.files[0])
+        fetch("http://localhost:34568/product",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                body: data
+            });
+    }
+</script>
+</BODY>
+</HTML>

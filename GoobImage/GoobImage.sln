@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoobImage", "GoobImage.vcxproj", "{A23033A3-DF43-4611-92F5-764D71ED5A2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		many|x64 = many|x64
+		many|x86 = many|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Debug|x64.ActiveCfg = Debug|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Debug|x64.Build.0 = Debug|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Debug|x86.ActiveCfg = Debug|Win32
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Debug|x86.Build.0 = Debug|Win32
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.many|x64.ActiveCfg = Release|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.many|x64.Build.0 = Release|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.many|x86.ActiveCfg = many|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Release|x64.ActiveCfg = Release|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Release|x64.Build.0 = Release|x64
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Release|x86.ActiveCfg = Release|Win32
+		{A23033A3-DF43-4611-92F5-764D71ED5A2B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {230EF8BA-344A-4D1C-A57F-A944CF22B1DA}
+	EndGlobalSection
+EndGlobal
