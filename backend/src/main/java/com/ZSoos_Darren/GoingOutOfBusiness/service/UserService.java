@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -98,6 +101,10 @@ public class UserService implements CommandLineRunner {
         newRegistration.setRole(Role.USER);
 
         userDao.save(newRegistration);
+    }
+
+    public Page<GoobUser> getAllUsers(int page, int numberOfItemsOnPage, String orderBy, String direction) {
+        return userDao.findAll(PageRequest.of(page, numberOfItemsOnPage, Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
     }
 
     public void addDefaultAdmin() {
