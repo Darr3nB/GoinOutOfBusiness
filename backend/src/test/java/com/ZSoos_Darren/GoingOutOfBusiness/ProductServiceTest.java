@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.dao.ProductDao;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import org.junit.jupiter.api.Assertions;
@@ -43,9 +43,9 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-    private static final Product testProduct1 = new Product(EXPECTED_ID, EXPECTED_NAME, EXPECTED_DESCRIPTION, EXPECTED_PRICE, EXPECTED_TYPE_OTHER, EXPECTED_INVENTORY);
-    private static final Product testProduct2 = new Product(EXPECTED_ID + 1, EXPECTED_NAME, EXPECTED_DESCRIPTION, EXPECTED_PRICE, EXPECTED_TYPE_OTHER, EXPECTED_INVENTORY + 1);
-    private static final Product testProduct3 = new Product(EXPECTED_ID + 2, EXPECTED_NAME, EXPECTED_DESCRIPTION, EXPECTED_PRICE, EXPECTED_TYPE_OTHER, EXPECTED_INVENTORY + 2);
+    private static final Product testProduct1 = new Product(EXPECTED_ID, EXPECTED_NAME, EXPECTED_DESCRIPTION, EXPECTED_PRICE, EXPECTED_TYPE_OTHER, EXPECTED_INVENTORY,"img.jpg");
+    private static final Product testProduct2 = new Product(EXPECTED_ID + 1, EXPECTED_NAME, EXPECTED_DESCRIPTION, EXPECTED_PRICE, EXPECTED_TYPE_OTHER, EXPECTED_INVENTORY + 1,"img.jpg");
+    private static final Product testProduct3 = new Product(EXPECTED_ID + 2, EXPECTED_NAME, EXPECTED_DESCRIPTION, EXPECTED_PRICE, EXPECTED_TYPE_OTHER, EXPECTED_INVENTORY + 2,"img.jpg");
 
 
     @BeforeEach

@@ -1,7 +1,7 @@
 package com.ZSoos_Darren.GoingOutOfBusiness;
 
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.Product;
-import com.ZSoos_Darren.GoingOutOfBusiness.Model.ProductType;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.CartItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
