@@ -1,5 +1,6 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
+import com.ZSoos_Darren.GoingOutOfBusiness.dto.EditedProduct;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
@@ -32,5 +33,11 @@ public class AdminController {
     public ResponseEntity<Void> addProduct(@RequestBody Product newProduct) {
         productService.saveProduct(newProduct);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/edit-product/{id}")
+    public ResponseEntity<Void> editProduct(@RequestBody EditedProduct editedProduct, @PathVariable Long id) {
+        boolean isSuccessful = productService.updateProduct(editedProduct,id);
+        return ResponseEntity.status(isSuccessful? HttpStatus.OK : HttpStatus.NOT_FOUND).build();
     }
 }

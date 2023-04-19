@@ -1,5 +1,6 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.service;
 
+import com.ZSoos_Darren.GoingOutOfBusiness.dto.EditedProduct;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.ProductType;
 import com.ZSoos_Darren.GoingOutOfBusiness.dao.ProductDao;
@@ -49,5 +50,13 @@ public class ProductService {
     public Page<Product> findAllByPriceBetweenAndNameContainsIgnoreCase(BigDecimal from, BigDecimal to, String searchedName, int page, int numberOfItemsOnPage, String orderBy, String direction){
         return productDao.findAllByPriceBetweenAndNameContainsIgnoreCase(from, to, searchedName,
                 PageRequest.of(page, numberOfItemsOnPage,Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
+    }
+
+    public boolean updateProduct(EditedProduct editedProduct, Long id) {
+        var productOptional = productDao.findById(id);
+        if(productOptional.isEmpty()) return false;
+        var product = productOptional.get();
+        productDao.save(editedProduct.overWriteProduct(product));
+        return true;
     }
 }
