@@ -59,4 +59,8 @@ public class ProductService {
         productDao.save(editedProduct.overWriteProduct(product));
         return true;
     }
+
+    public void deleteProduct(Long id) {
+        productDao.deleteById(id);
+    }
 }

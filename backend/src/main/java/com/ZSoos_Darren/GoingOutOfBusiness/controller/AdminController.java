@@ -42,6 +42,12 @@ public class AdminController {
         return ResponseEntity.status(isSuccessful? HttpStatus.OK : HttpStatus.NOT_FOUND).build();
     }
 
+    @DeleteMapping("/delete-product/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @PostMapping("/add-new-admin")
     public ResponseEntity<Void> addNewAdmin(@RequestBody Registration registration){
         if(!registration.validateField()) {
