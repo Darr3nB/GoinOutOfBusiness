@@ -103,8 +103,12 @@ public class UserService implements CommandLineRunner {
         userDao.save(newRegistration);
     }
 
-    public Page<GoobUser> getAllUsers(int page, int numberOfItemsOnPage, String orderBy, String direction) {
-        return userDao.findAll(PageRequest.of(page, numberOfItemsOnPage, Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
+    public Page<GoobUser> searchWithoutDate(int page, int numberOfItemsOnPage, String orderBy, String direction, Long id, String email, String roleString) {
+        return userDao.completeSearchWithoutDate(
+                id,
+                email,
+                Role.fromString(roleString),
+                PageRequest.of(page, numberOfItemsOnPage, Sort.by(direction.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,orderBy)));
     }
 
     public void addDefaultAdmin() {
