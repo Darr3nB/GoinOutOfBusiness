@@ -3,6 +3,7 @@ package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 import com.ZSoos_Darren.GoingOutOfBusiness.dto.EditedProduct;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
 import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
+import com.ZSoos_Darren.GoingOutOfBusiness.dto.Registration;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import lombok.AllArgsConstructor;
@@ -39,5 +40,14 @@ public class AdminController {
     public ResponseEntity<Void> editProduct(@RequestBody EditedProduct editedProduct, @PathVariable Long id) {
         boolean isSuccessful = productService.updateProduct(editedProduct,id);
         return ResponseEntity.status(isSuccessful? HttpStatus.OK : HttpStatus.NOT_FOUND).build();
+    }
+
+    @PostMapping("/add-new-admin")
+    public ResponseEntity<Void> addNewAdmin(@RequestBody Registration registration){
+        if(!registration.validateField()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        userService.saveNewAdmin(registration);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

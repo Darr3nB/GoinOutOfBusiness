@@ -134,4 +134,20 @@ public class UserService implements CommandLineRunner {
     public Boolean containsEmail(String email) {
         return userDao.existsByEmail(email);
     }
+
+    public void saveNewAdmin(Registration regDto) {
+        GoobUser newRegistration = new GoobUser();
+
+        newRegistration.setEmail(regDto.getEmail());
+        newRegistration.setPassword(passwordAgent.hashPassword(regDto.getPassword()));
+        newRegistration.setDateOfBirth((Timestamp) regDto.getDateOfBrith());
+        if (regDto.getProfilePicture() == null) {
+            newRegistration.setProfilePicture(Utility.questionMarkPicture);
+        } else {
+            newRegistration.setProfilePicture(regDto.getProfilePicture());
+        }
+        newRegistration.setRole(Role.ADMIN);
+
+        userDao.save(newRegistration);
+    }
 }
