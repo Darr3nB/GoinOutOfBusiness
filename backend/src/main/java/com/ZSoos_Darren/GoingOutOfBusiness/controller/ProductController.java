@@ -59,13 +59,6 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/add-product")
-    public ResponseEntity<Void> addProduct(@RequestBody Product newProduct) {
-        // TODO: 2023. 03. 01. Check for admin role for this specific route
-        productService.saveProduct(newProduct);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getProductDetails(@PathVariable long id) {
         var product = productService.getProductForId(id);

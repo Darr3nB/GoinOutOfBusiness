@@ -1,14 +1,14 @@
 package com.ZSoos_Darren.GoingOutOfBusiness.controller;
 
 import com.ZSoos_Darren.GoingOutOfBusiness.model.GoobUser;
+import com.ZSoos_Darren.GoingOutOfBusiness.model.Product;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.ProductService;
 import com.ZSoos_Darren.GoingOutOfBusiness.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -26,5 +26,11 @@ public class AdminController {
                                       @RequestParam(name = "email", required = false) String email,
                                       @RequestParam(name = "role", required = false) String role) {
         return userService.searchWithoutDate(page,perPage,orderBy,direction,id,email,role);
+    }
+
+    @PostMapping("/add-product")
+    public ResponseEntity<Void> addProduct(@RequestBody Product newProduct) {
+        productService.saveProduct(newProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
