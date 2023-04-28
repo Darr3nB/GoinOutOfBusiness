@@ -12,6 +12,34 @@ export let utility = {
         })
             .catch(reason => console.log(`An error happened: ${reason}`));
     },
+    apiAdminGet: async function(path) {
+        // ToDo Add admin rights to fetch
+        return await fetch(path);
+    },
+    apiAdminPost: async function(path, data) {
+        console.log(data)
+        // ToDo Add admin rights to fetch
+        return await fetch(path, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .catch(reason => console.log(`An error happened: ${reason}`));
+    },
+    apiAdminPut: async function(path, data) {
+        console.log(data)
+        // ToDo Add admin rights to fetch
+        return await fetch(path, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .catch(reason => console.log(`An error happened: ${reason}`));
+    },
     validateEmail: function (email) {
         const regEx = /\S+@\S+\.\S+/;
 
