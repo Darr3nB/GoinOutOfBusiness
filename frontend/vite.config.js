@@ -10,6 +10,7 @@ export default defineConfig({
     proxy: {
       '/user': apiBaseUrl,
       '/products': apiBaseUrl,
+      '/admin': apiBaseUrl
     }
   }
 })
