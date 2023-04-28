@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {utility} from "../utility.js";
 import LoadingIndicator from "../components/LoadingIndicator.jsx";
+import EditProductButton from "../components/AdminPanel/EditProductButton/EditProductButton.jsx";
 
 function ProductView() {
     const getProductDataFromAPI = useCallback(
@@ -46,6 +47,9 @@ function ProductView() {
                 </div>
                 <div id={'product-inventory'}
                      className={`${inventoryAmountClassName}`}>Currently {productData.inventory} in stock
+                </div>
+                <div>
+                    <EditProductButton productObject={productData} refreshFunction={getProductDataFromAPI}/>
                 </div>
             </div>
             <div id={'product-description'} className={'right-column'}>
